@@ -1,0 +1,109 @@
+{
+  "recordedAt": "2026-10-22T11:24:48.963Z",
+  "status": "verified-local-contract",
+  "officialCorrectnessVerified": false,
+  "sourceManifestSha256": "9c41e2794115eda7495f084be9d5daf57cc9e8dd1d52e76e566e9e8575f0d511",
+  "executableSha256": "82e4c2a2323940633b388f82bee1a9464ca0e81df86d886ed65a95393eb4e1f0",
+  "files": [
+    {
+      "path": ".dockerignore",
+      "sha256": "a2f3cf57451024a631e775a6a4fd3b3d0c86272a46ae2acc79b792ea3607dbbd"
+    },
+    {
+      "path": "Dockerfile",
+      "sha256": "a14b585396bd219e3d03d6616e8dc328e4e96e87ffd51e9b0d6863c7bab67174"
+    },
+    {
+      "path": "build.sh",
+      "sha256": "0ed9d226217cb5a2dce7070f658f6c90200e453839fa93ee664d034e49e2b9e2"
+    },
+    {
+      "path": "scripts/benchmark.mjs",
+      "sha256": "1c50b848710899c92542eb70a9f998f6f884876a642cc06b3fc9c68ae3474efb"
+    },
+    {
+      "path": "scripts/build.mjs",
+      "sha256": "eea6304e0d6dbd84f5146c379ca48781c8181f705395fd2822b4806517fd99f1"
+    },
+    {
+      "path": "scripts/checkpoint.mjs",
+      "sha256": "032475993dca82ab87fb53d4b3268c0062ff496a53902fa5abf8b4a55abd8ccd"
+    },
+    {
+      "path": "scripts/container-check.mjs",
+      "sha256": "af8f2248efe50e8e52aef221f163d24c40f836681c02fa11d4b9e6ed0390ab8a"
+    },
+    {
+      "path": "scripts/controlled-experiment.mjs",
+      "sha256": "5288a9a4954b87b2c765310a4a4feabd779eec5a2ebac7b8143dacae8371274d"
+    },
+    {
+      "path": "scripts/lib/evidence.mjs",
+      "sha256": "0103cb254ab958d747eb9a91d17e4bed8c4c47356b7ad161125ace89e55f1809"
+    },
+    {
+      "path": "scripts/lib/verification.mjs",
+      "sha256": "0fad6b862aca4874580f6ca5c13aecfdd55e3574099c8f843522a12634ac37dd"
+    },
+    {
+      "path": "scripts/paired-experiment.mjs",
+      "sha256": "801da343736d42ad27c72e17a4980d4a0f034dfaad5616cc30963f7638360453"
+    },
+    {
+      "path": "scripts/preflight.mjs",
+      "sha256": "a1bed09c9c9a6afa03f2911caa3dc4122af5253caa484bfea6eaef802a370e2e"
+    },
+    {
+      "path": "scripts/profile-experiment.mjs",
+      "sha256": "c1c4baad43e68188beec08d0a438dd98779ecb8497d978322a923874d6e67ffc"
+    },
+    {
+      "path": "scripts/tests/verification.test.mjs",
+      "sha256": "0dc5bc04ed30678a50ca032b4c2e3c0364005f48924f4b5a585675a4430c32af"
+    },
+    {
+      "path": "scripts/tests/workload.test.mjs",
+      "sha256": "e4a642a21eaa11e83572bcae6578c5beafbcd3c3348979469c5e589bc3038c39"
+    },
+    {
+      "path": "scripts/workload.mjs",
+      "sha256": "068392674d25a9c343899f8c85d2355bef49259a5476788f728d60a4f008776a"
+    },
+    {
+      "path": "toolchain.lock.json",
+      "sha256": "9816ca1f3180d19f7ac87edf80d5cf66d7cb4f45f42b91c99ddb9a64763fa95b"
+    },
+    {
+      "path": "track-a/LOCAL_CONTRACT.md",
+      "sha256": "b449fdb89e15372648aaacadad1dd65a3166cba7009ca974261d65e6d3181b12"
+    },
+    {
+      "path": "track-a/src/main.cpp",
+      "sha256": "e45f63deab244e0e251253d439ce78fdb2b17bcb9b3713d9798ea613659a55bd"
+    },
+    {
+      "path": "track-a/tests/test.mjs",
+      "sha256": "6569a5c2fa25ffbd3194ac0c3c5b1bb5554dc54b64ec3b8f2b183fe365cdc94b"
+    },
+    {
+      "path": "PLAN.md",
+      "sha256": "4c0f7ca69197b53a15819cbcd843aee493bc32c8ad8d83428a74c31d2f36a194"
+    },
+    {
+      "path": "README.md",
+      "sha256": "483f12aa7ec0b08b7b0fb01d2d66bc630b10cfcfc54a1bc767ff785a3f6a9780"
+    },
+    {
+      "path": "PERF.md",
+      "sha256": "71b371791be71a67169ebfa25176887f4894348c92001055672192ae27891136"
+    },
+    {
+      "path": "evidence/preflight.json",
+      "sha256": "9d7646295f170a75ee57cbdbb787530f1ceead8fc842fff2ffab07d3743d8989"
+    },
+    {
+      "path": "executable/track-a",
+      "sha256": "82e4c2a2323940633b388f82bee1a9464ca0e81df86d886ed65a95393eb4e1f0"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+# Read by the board and the scoring harness.
+track = "a"
+team = "TODO_OWNER_TEAM_NAME"
+language = "C++20"
+dependency_count = 0

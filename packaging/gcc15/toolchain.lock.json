@@ -1,0 +1,18 @@
+{
+  "purpose": "Isolated local packaging provenance; not organizer metadata",
+  "language": "C++20",
+  "solver": "unchanged scalar local-v1",
+  "solverSourceSha256": "58819b871ddbf873731a7d54905ffe4c18477822cb76f7aa4d263b813ce29496",
+  "compilerImage": "gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce",
+  "platform": "linux/amd64",
+  "allowlistUrl": "https://speeddemon.dev/allowlist.json",
+  "allowlistSha256": "e01f5d5ed34b9f8d9dcbf6b0a0e876442dfa0ffd0953f90333348d753b8b9be2",
+  "rootToolchainLockPreserved": true,
+  "runtimeStrategy": "Retain same allowed GCC image with its runtime libraries; no additional FROM or external COPY --from",
+  "observedCompilerVersion": "g++ (GCC) 15.3.0",
+  "baseImageId": "sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce",
+  "verifiedFinalImageId": "sha256:82347706832e5b0e37ef598518bda9bf367a3a9f5964f9ab6db254609e4dbff6",
+  "optimizedBinarySha256": "368f0fb3769b27f3fafbde22d2ad2bf4e18c69c5207ca2efa3e4f1fef123fbe5",
+  "sanitizerBinarySha256": "294e2554c7e6f2a6ebadacbd5642f21751b3a67be1c190226cf234bd2d2c772c",
+  "verificationRecord": "artifacts/packaging-gcc15/verification.json"
+}

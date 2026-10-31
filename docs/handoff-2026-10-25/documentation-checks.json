@@ -1,0 +1,317 @@
+{
+  "recordedAt": "2026-10-25T14:34:05.074806+00:00",
+  "localLinksChecked": 72,
+  "activeDocuments": [
+    "README.md",
+    "PLAN.md",
+    "docs/OPTIMIZATION_WRITEUP_DRAFT.md",
+    "docs/DELIVERY_INVENTORY.md",
+    "docs/history/README.md"
+  ],
+  "links": [
+    {
+      "from": "README.md",
+      "target": "toolchain.lock.json"
+    },
+    {
+      "from": "README.md",
+      "target": "track-a/LOCAL_CONTRACT.md"
+    },
+    {
+      "from": "README.md",
+      "target": "artifacts/verification/preflight.json"
+    },
+    {
+      "from": "README.md",
+      "target": "candidates/endpoint-spans/artifacts/verification/preflight.json"
+    },
+    {
+      "from": "README.md",
+      "target": "baselines/verified-ac513ecb51d4ee4c/manifest.json"
+    },
+    {
+      "from": "README.md",
+      "target": "candidates/endpoint-spans/baselines/verified-9c41e2794115eda7/manifest.json"
+    },
+    {
+      "from": "README.md",
+      "target": "baselines/verified-d9c5e3828341492a/manifest.json"
+    },
+    {
+      "from": "README.md",
+      "target": "baselines/verified-7dee32a851a647e0/manifest.json"
+    },
+    {
+      "from": "README.md",
+      "target": "track-a/LOCAL_CONTRACT.md"
+    },
+    {
+      "from": "README.md",
+      "target": "PLAN.md#official-spec-reconciliation"
+    },
+    {
+      "from": "README.md",
+      "target": "artifacts/experiments/track-a-m3/REPORT.md"
+    },
+    {
+      "from": "README.md",
+      "target": "artifacts/experiments/track-a-m4/REPORT.md"
+    },
+    {
+      "from": "README.md",
+      "target": "docs/DELIVERY_INVENTORY.md"
+    },
+    {
+      "from": "README.md",
+      "target": "docs/OPTIMIZATION_WRITEUP_DRAFT.md"
+    },
+    {
+      "from": "README.md",
+      "target": "PERF.md"
+    },
+    {
+      "from": "README.md",
+      "target": "docs/history/README-before-handoff-2026-10-25.md"
+    },
+    {
+      "from": "PLAN.md",
+      "target": "candidates/endpoint-spans/track-a/src/main.cpp"
+    },
+    {
+      "from": "PLAN.md",
+      "target": "baselines/verified-ac513ecb51d4ee4c/manifest.json"
+    },
+    {
+      "from": "PLAN.md",
+      "target": "candidates/endpoint-spans/baselines/verified-9c41e2794115eda7/manifest.json"
+    },
+    {
+      "from": "PLAN.md",
+      "target": "baselines/verified-d9c5e3828341492a/manifest.json"
+    },
+    {
+      "from": "PLAN.md",
+      "target": "baselines/verified-7dee32a851a647e0/manifest.json"
+    },
+    {
+      "from": "PLAN.md",
+      "target": "track-a/src/main.cpp"
+    },
+    {
+      "from": "PLAN.md",
+      "target": "track-a/tests/test.mjs"
+    },
+    {
+      "from": "PLAN.md",
+      "target": "docs/DELIVERY_INVENTORY.md"
+    },
+    {
+      "from": "PLAN.md",
+      "target": "track-a/LOCAL_CONTRACT.md"
+    },
+    {
+      "from": "PLAN.md",
+      "target": "docs/OPTIMIZATION_WRITEUP_DRAFT.md"
+    },
+    {
+      "from": "PLAN.md",
+      "target": "README.md"
+    },
+    {
+      "from": "PLAN.md",
+      "target": "docs/DELIVERY_INVENTORY.md"
+    },
+    {
+      "from": "PLAN.md",
+      "target": "docs/OPTIMIZATION_WRITEUP_DRAFT.md"
+    },
+    {
+      "from": "PLAN.md",
+      "target": "PERF.md"
+    },
+    {
+      "from": "PLAN.md",
+      "target": "artifacts/experiments/track-a-m3/REPORT.md"
+    },
+    {
+      "from": "PLAN.md",
+      "target": "artifacts/experiments/track-a-m4/REPORT.md"
+    },
+    {
+      "from": "PLAN.md",
+      "target": "docs/history/PLAN-before-handoff-2026-10-25.md"
+    },
+    {
+      "from": "docs/OPTIMIZATION_WRITEUP_DRAFT.md",
+      "target": "../track-a/src/main.cpp"
+    },
+    {
+      "from": "docs/OPTIMIZATION_WRITEUP_DRAFT.md",
+      "target": "../track-a/LOCAL_CONTRACT.md"
+    },
+    {
+      "from": "docs/OPTIMIZATION_WRITEUP_DRAFT.md",
+      "target": "../PLAN.md#official-spec-reconciliation"
+    },
+    {
+      "from": "docs/OPTIMIZATION_WRITEUP_DRAFT.md",
+      "target": "../candidates/endpoint-spans/track-a/src/main.cpp"
+    },
+    {
+      "from": "docs/OPTIMIZATION_WRITEUP_DRAFT.md",
+      "target": "../track-a/tests/test.mjs"
+    },
+    {
+      "from": "docs/OPTIMIZATION_WRITEUP_DRAFT.md",
+      "target": "../artifacts/experiments/track-a-m2/REPORT.md"
+    },
+    {
+      "from": "docs/OPTIMIZATION_WRITEUP_DRAFT.md",
+      "target": "../artifacts/experiments/track-a-m3/candidate.diff"
+    },
+    {
+      "from": "docs/OPTIMIZATION_WRITEUP_DRAFT.md",
+      "target": "../artifacts/experiments/track-a-m3/REPORT.md"
+    },
+    {
+      "from": "docs/OPTIMIZATION_WRITEUP_DRAFT.md",
+      "target": "../artifacts/experiments/track-a-m4/REPORT.md"
+    },
+    {
+      "from": "docs/OPTIMIZATION_WRITEUP_DRAFT.md",
+      "target": "../baselines/verified-ac513ecb51d4ee4c/manifest.json"
+    },
+    {
+      "from": "docs/OPTIMIZATION_WRITEUP_DRAFT.md",
+      "target": "../candidates/endpoint-spans/baselines/verified-9c41e2794115eda7/manifest.json"
+    },
+    {
+      "from": "docs/OPTIMIZATION_WRITEUP_DRAFT.md",
+      "target": "DELIVERY_INVENTORY.md"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../PLAN.md#official-spec-reconciliation"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../track-a/src/main.cpp"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../build.sh"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../Dockerfile"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../.dockerignore"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../README.md"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../toolchain.lock.json"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../track-a/LOCAL_CONTRACT.md"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "OPTIMIZATION_WRITEUP_DRAFT.md"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../track-a/tests/test.mjs"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../scripts/build.mjs"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../scripts/preflight.mjs"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../scripts/container-check.mjs"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../scripts/checkpoint.mjs"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../scripts/lib/evidence.mjs"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../scripts/lib/verification.mjs"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../scripts/tests/verification.test.mjs"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../scripts/tests/workload.test.mjs"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../scripts/workload.mjs"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../scripts/benchmark.mjs"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../scripts/controlled-experiment.mjs"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../scripts/paired-experiment.mjs"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../scripts/profile-experiment.mjs"
+    },
+    {
+      "from": "docs/DELIVERY_INVENTORY.md",
+      "target": "../.gitignore"
+    },
+    {
+      "from": "docs/history/README.md",
+      "target": "README-before-handoff-2026-10-25.md"
+    },
+    {
+      "from": "docs/history/README.md",
+      "target": "PLAN-before-handoff-2026-10-25.md"
+    },
+    {
+      "from": "docs/history/README.md",
+      "target": "PERF-before-handoff-2026-10-25.md"
+    }
+  ],
+  "staticCommandAndInterfaceCheck": true,
+  "evidenceNumbersMatched": true,
+  "singleActiveReconciliationTable": true,
+  "licenseFileAbsent": true,
+  "gitHeadAndConfigAbsentInVisibleGitPath": true,
+  "historicalCopiesExact": true,
+  "perfHistoricalBodyExact": true,
+  "commandsExecutedForChecks": "Read files/JSON and syntax-only shell parsing; no solver/build/test/preflight/benchmark/container commands executed",
+  "lastReviewedAt": "2026-10-25T14:35:30.456719+00:00",
+  "candidateCommandUsesSubshell": true,
+  "gitProbe": {
+    "command": "git rev-parse --is-inside-work-tree",
+    "exitStatus": 128,
+    "stderr": "fatal: not a git repository (or any parent up to mount point /mnt)\nStopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).\n",
+    "mutations": false
+  }
+}

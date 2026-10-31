@@ -1,0 +1,51 @@
+{
+  "createdAt": "2026-10-31T08:08:28.983240+00:00",
+  "context": [
+    {
+      "path": ".dockerignore",
+      "bytes": 37,
+      "sha256": "e4fdb61df432ee1d1f134a2a5dd8aaab82b40614f3d5577f01990f46eab2477b"
+    },
+    {
+      "path": ".speed-demon.toml",
+      "bytes": 127,
+      "sha256": "633dad4d3b4c75a68ab44cf4e6b05629813f427c78a0e92e5133aa18303c0493"
+    },
+    {
+      "path": "Dockerfile",
+      "bytes": 231,
+      "sha256": "bcbbd20f960230c2721171d4f2d12dd84d7fea652edf341fe96a8ce9acaaecd4"
+    },
+    {
+      "path": "PERF.md",
+      "bytes": 536,
+      "sha256": "d5e0fd8aa5d3a2d61243b6906318134650dabd2c2b0f12c847ca906266718ce8"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1953,
+      "sha256": "1b8fd101f9ff965af5cae4c5ba5dcdf89b95404b1d3751f4dff7b80bb40944ad"
+    },
+    {
+      "path": "build.sh",
+      "bytes": 147,
+      "sha256": "807197c06bf5a5ae70f8a038f7ccdb09423cc6066d47129c61be4bd3c0540702"
+    },
+    {
+      "path": "src/main.cpp",
+      "bytes": 20341,
+      "sha256": "e46b40c01364d334716341f713dbb5e035ce7b043ed1d42f7c849eccd026a62d"
+    }
+  ],
+  "compilerImage": "gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce",
+  "compilerVersion": "g++ (GCC) 15.3.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "platform": "linux/amd64",
+  "sourceSha256": "e46b40c01364d334716341f713dbb5e035ce7b043ed1d42f7c849eccd026a62d",
+  "binarySha256": "d657cea38aef5b76a1a286a3f558ba5006dbec3ec5ed0505faef3ce3a612d40b",
+  "sanitizerBinarySha256": "c92e2559c405720124e72e06fd00b0e7a9ff587c315f94d084d50c27ad933afc",
+  "imageId": "sha256:481a350a96fc0d6d6cc7bc9296f6056b745267cb9b29654f24c4ab22b5a446c5",
+  "specCommit": "ad1f06063a76bf94066f169e133ec0c2e1485b65",
+  "starterCommit": "430d690ec0959ae15e05f6c643ffc76a9e9bb923",
+  "verificationRecord": "artifacts/official-integration/verification.json",
+  "ownerMetadataComplete": false
+}

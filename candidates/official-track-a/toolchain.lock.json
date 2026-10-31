@@ -1,0 +1,13 @@
+{
+  "compilerImage": "gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce",
+  "compilerVersion": "g++ (GCC) 15.3.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "platform": "linux/amd64",
+  "sourceSha256": "e46b40c01364d334716341f713dbb5e035ce7b043ed1d42f7c849eccd026a62d",
+  "binarySha256": "d657cea38aef5b76a1a286a3f558ba5006dbec3ec5ed0505faef3ce3a612d40b",
+  "sanitizerBinarySha256": "c92e2559c405720124e72e06fd00b0e7a9ff587c315f94d084d50c27ad933afc",
+  "imageId": "sha256:481a350a96fc0d6d6cc7bc9296f6056b745267cb9b29654f24c4ab22b5a446c5",
+  "specCommit": "ad1f06063a76bf94066f169e133ec0c2e1485b65",
+  "starterCommit": "430d690ec0959ae15e05f6c643ffc76a9e9bb923",
+  "verificationRecord": "artifacts/official-integration/verification.json",
+  "ownerMetadataComplete": false
+}

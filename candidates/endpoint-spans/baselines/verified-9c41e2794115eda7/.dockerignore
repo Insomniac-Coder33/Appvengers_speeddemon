@@ -1,0 +1,6 @@
+*
+!Dockerfile
+!build.sh
+!track-a
+!track-a/src
+!track-a/src/**

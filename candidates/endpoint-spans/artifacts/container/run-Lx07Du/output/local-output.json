@@ -1,0 +1,1 @@
+{"contract":"local-v1","endpoints":[{"endpoint_hex":"2f61","count":1,"p50_us":7,"p95_us":7,"p99_us":7}],"hours":[{"endpoint_hex":"2f61","hour_utc":"2024-02-29T12:00:00Z","requests":1,"errors":1,"rate_numerator":1,"rate_denominator":1}]}
