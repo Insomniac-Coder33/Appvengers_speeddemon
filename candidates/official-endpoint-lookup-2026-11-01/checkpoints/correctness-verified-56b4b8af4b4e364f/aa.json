@@ -1,0 +1,875 @@
+{
+  "startedAt": "2026-11-01T16:31:43.057653+00:00",
+  "mode": "aa",
+  "completed": true,
+  "commands": [
+    {
+      "label": "start aa",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "run",
+        "-d",
+        "--name",
+        "oa-aa-9dectosg",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--user=65534:65534",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--memory=8g",
+        "--memory-swap=8g",
+        "--pids-limit=512",
+        "--cpuset-cpus=0",
+        "--tmpfs",
+        "/tmp:rw,size=1g,exec",
+        "-e",
+        "TRACK=a",
+        "--mount",
+        "type=bind,source=/tmp/endpoint-lookup-9dectosg,target=/work",
+        "--mount",
+        "type=bind,source=/tmp/endpoint-lookup-9dectosg/data,target=/data,readonly",
+        "--entrypoint",
+        "/bin/sh",
+        "sha256:2e75bb3b1f674c068b58074058e99c8440390d2af6022d6731c0d5c7d19359ec",
+        "-c",
+        "exec sleep infinity"
+      ],
+      "startedAt": "2026-11-01T16:31:43.333591+00:00",
+      "exitStatus": 0,
+      "stdout": "8496b79dd99d5b3c5ba4b635caae192a943c880480af61eed429f68bf2b6bf97\n",
+      "stderr": "",
+      "elapsedSeconds": 0.7462306389934383
+    },
+    {
+      "label": "complete program aa-warm-baseline",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "exec",
+        "-e",
+        "DIAG_OFFSET=0",
+        "oa-aa-9dectosg",
+        "/work/bin/timer",
+        "/work/bin/baseline",
+        "--data",
+        "/data",
+        "--out",
+        "/work/outputs/aa-warm-baseline"
+      ],
+      "startedAt": "2026-11-01T16:31:44.113231+00:00",
+      "exitStatus": 0,
+      "stdout": "{\"wallSeconds\":1.017948465,\"userSeconds\":0.992891000,\"systemSeconds\":0.089105000,\"maxRssKiB\":32844,\"minorFaults\":8026,\"majorFaults\":0,\"voluntarySwitches\":1,\"involuntarySwitches\":86,\"exitCode\":0,\"signal\":0}\n",
+      "stderr": "",
+      "elapsedSeconds": 1.5562941110110842
+    },
+    {
+      "label": "complete program aa-warm-candidate",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "exec",
+        "-e",
+        "DIAG_OFFSET=0",
+        "oa-aa-9dectosg",
+        "/work/bin/timer",
+        "/work/bin/candidate",
+        "--data",
+        "/data",
+        "--out",
+        "/work/outputs/aa-warm-candidate"
+      ],
+      "startedAt": "2026-11-01T16:31:45.748817+00:00",
+      "exitStatus": 0,
+      "stdout": "{\"wallSeconds\":0.966758382,\"userSeconds\":0.976781000,\"systemSeconds\":0.050962000,\"maxRssKiB\":32832,\"minorFaults\":8026,\"majorFaults\":0,\"voluntarySwitches\":1,\"involuntarySwitches\":81,\"exitCode\":0,\"signal\":0}\n",
+      "stderr": "",
+      "elapsedSeconds": 1.4852621590252966
+    },
+    {
+      "label": "complete program aa-1-A",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "exec",
+        "-e",
+        "DIAG_OFFSET=0",
+        "oa-aa-9dectosg",
+        "/work/bin/timer",
+        "/work/bin/baseline",
+        "--data",
+        "/data",
+        "--out",
+        "/work/outputs/aa-1-A"
+      ],
+      "startedAt": "2026-11-01T16:31:47.283102+00:00",
+      "exitStatus": 0,
+      "stdout": "{\"wallSeconds\":1.138362335,\"userSeconds\":1.103753000,\"systemSeconds\":0.106130000,\"maxRssKiB\":32888,\"minorFaults\":8026,\"majorFaults\":0,\"voluntarySwitches\":1,\"involuntarySwitches\":98,\"exitCode\":0,\"signal\":0}\n",
+      "stderr": "",
+      "elapsedSeconds": 1.738711478014011
+    },
+    {
+      "label": "complete program aa-1-B",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "exec",
+        "-e",
+        "DIAG_OFFSET=0",
+        "oa-aa-9dectosg",
+        "/work/bin/timer",
+        "/work/bin/baseline",
+        "--data",
+        "/data",
+        "--out",
+        "/work/outputs/aa-1-B"
+      ],
+      "startedAt": "2026-11-01T16:31:49.082617+00:00",
+      "exitStatus": 0,
+      "stdout": "{\"wallSeconds\":1.043693050,\"userSeconds\":1.041524000,\"systemSeconds\":0.068017000,\"maxRssKiB\":32708,\"minorFaults\":8024,\"majorFaults\":0,\"voluntarySwitches\":1,\"involuntarySwitches\":91,\"exitCode\":0,\"signal\":0}\n",
+      "stderr": "",
+      "elapsedSeconds": 1.6371066240244545
+    },
+    {
+      "label": "complete program aa-2-B",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "exec",
+        "-e",
+        "DIAG_OFFSET=0",
+        "oa-aa-9dectosg",
+        "/work/bin/timer",
+        "/work/bin/baseline",
+        "--data",
+        "/data",
+        "--out",
+        "/work/outputs/aa-2-B"
+      ],
+      "startedAt": "2026-11-01T16:31:50.764267+00:00",
+      "exitStatus": 0,
+      "stdout": "{\"wallSeconds\":0.953502344,\"userSeconds\":0.932610000,\"systemSeconds\":0.080911000,\"maxRssKiB\":32844,\"minorFaults\":8027,\"majorFaults\":0,\"voluntarySwitches\":1,\"involuntarySwitches\":81,\"exitCode\":0,\"signal\":0}\n",
+      "stderr": "",
+      "elapsedSeconds": 1.6197782160015777
+    },
+    {
+      "label": "complete program aa-2-A",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "exec",
+        "-e",
+        "DIAG_OFFSET=0",
+        "oa-aa-9dectosg",
+        "/work/bin/timer",
+        "/work/bin/baseline",
+        "--data",
+        "/data",
+        "--out",
+        "/work/outputs/aa-2-A"
+      ],
+      "startedAt": "2026-11-01T16:31:52.440926+00:00",
+      "exitStatus": 0,
+      "stdout": "{\"wallSeconds\":1.087993003,\"userSeconds\":1.074730000,\"systemSeconds\":0.076463000,\"maxRssKiB\":32584,\"minorFaults\":8025,\"majorFaults\":0,\"voluntarySwitches\":2,\"involuntarySwitches\":109,\"exitCode\":0,\"signal\":0}\n",
+      "stderr": "",
+      "elapsedSeconds": 1.6525817310321145
+    },
+    {
+      "label": "complete program aa-3-A",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "exec",
+        "-e",
+        "DIAG_OFFSET=0",
+        "oa-aa-9dectosg",
+        "/work/bin/timer",
+        "/work/bin/baseline",
+        "--data",
+        "/data",
+        "--out",
+        "/work/outputs/aa-3-A"
+      ],
+      "startedAt": "2026-11-01T16:31:54.159160+00:00",
+      "exitStatus": 0,
+      "stdout": "{\"wallSeconds\":0.971957839,\"userSeconds\":0.956440000,\"systemSeconds\":0.076515000,\"maxRssKiB\":32636,\"minorFaults\":8024,\"majorFaults\":0,\"voluntarySwitches\":1,\"involuntarySwitches\":82,\"exitCode\":0,\"signal\":0}\n",
+      "stderr": "",
+      "elapsedSeconds": 1.728775659983512
+    },
+    {
+      "label": "complete program aa-3-B",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "exec",
+        "-e",
+        "DIAG_OFFSET=0",
+        "oa-aa-9dectosg",
+        "/work/bin/timer",
+        "/work/bin/baseline",
+        "--data",
+        "/data",
+        "--out",
+        "/work/outputs/aa-3-B"
+      ],
+      "startedAt": "2026-11-01T16:31:55.978791+00:00",
+      "exitStatus": 0,
+      "stdout": "{\"wallSeconds\":1.076315116,\"userSeconds\":1.075346000,\"systemSeconds\":0.068006000,\"maxRssKiB\":32840,\"minorFaults\":8028,\"majorFaults\":0,\"voluntarySwitches\":1,\"involuntarySwitches\":89,\"exitCode\":0,\"signal\":0}\n",
+      "stderr": "",
+      "elapsedSeconds": 1.7079458130174316
+    },
+    {
+      "label": "complete program aa-4-B",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "exec",
+        "-e",
+        "DIAG_OFFSET=0",
+        "oa-aa-9dectosg",
+        "/work/bin/timer",
+        "/work/bin/baseline",
+        "--data",
+        "/data",
+        "--out",
+        "/work/outputs/aa-4-B"
+      ],
+      "startedAt": "2026-11-01T16:31:57.736515+00:00",
+      "exitStatus": 0,
+      "stdout": "{\"wallSeconds\":1.157368627,\"userSeconds\":1.080214000,\"systemSeconds\":0.144595000,\"maxRssKiB\":32840,\"minorFaults\":8029,\"majorFaults\":0,\"voluntarySwitches\":1,\"involuntarySwitches\":98,\"exitCode\":0,\"signal\":0}\n",
+      "stderr": "",
+      "elapsedSeconds": 1.7704718690365553
+    },
+    {
+      "label": "complete program aa-4-A",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "exec",
+        "-e",
+        "DIAG_OFFSET=0",
+        "oa-aa-9dectosg",
+        "/work/bin/timer",
+        "/work/bin/baseline",
+        "--data",
+        "/data",
+        "--out",
+        "/work/outputs/aa-4-A"
+      ],
+      "startedAt": "2026-11-01T16:31:59.574579+00:00",
+      "exitStatus": 0,
+      "stdout": "{\"wallSeconds\":1.076111855,\"userSeconds\":1.081591000,\"systemSeconds\":0.059381000,\"maxRssKiB\":32760,\"minorFaults\":8026,\"majorFaults\":0,\"voluntarySwitches\":1,\"involuntarySwitches\":92,\"exitCode\":0,\"signal\":0}\n",
+      "stderr": "",
+      "elapsedSeconds": 1.7247136320220307
+    },
+    {
+      "label": "complete program aa-5-A",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "exec",
+        "-e",
+        "DIAG_OFFSET=0",
+        "oa-aa-9dectosg",
+        "/work/bin/timer",
+        "/work/bin/baseline",
+        "--data",
+        "/data",
+        "--out",
+        "/work/outputs/aa-5-A"
+      ],
+      "startedAt": "2026-11-01T16:32:03.233487+00:00",
+      "exitStatus": 0,
+      "stdout": "{\"wallSeconds\":1.103201087,\"userSeconds\":1.058644000,\"systemSeconds\":0.110099000,\"maxRssKiB\":32836,\"minorFaults\":8026,\"majorFaults\":0,\"voluntarySwitches\":1,\"involuntarySwitches\":111,\"exitCode\":0,\"signal\":0}\n",
+      "stderr": "",
+      "elapsedSeconds": 1.9103413739940152
+    },
+    {
+      "label": "complete program aa-5-B",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "exec",
+        "-e",
+        "DIAG_OFFSET=0",
+        "oa-aa-9dectosg",
+        "/work/bin/timer",
+        "/work/bin/baseline",
+        "--data",
+        "/data",
+        "--out",
+        "/work/outputs/aa-5-B"
+      ],
+      "startedAt": "2026-11-01T16:32:05.210723+00:00",
+      "exitStatus": 0,
+      "stdout": "{\"wallSeconds\":1.139723950,\"userSeconds\":1.148148000,\"systemSeconds\":0.059533000,\"maxRssKiB\":32708,\"minorFaults\":8024,\"majorFaults\":0,\"voluntarySwitches\":1,\"involuntarySwitches\":118,\"exitCode\":0,\"signal\":0}\n",
+      "stderr": "",
+      "elapsedSeconds": 1.80624515801901
+    },
+    {
+      "label": "complete program aa-6-B",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "exec",
+        "-e",
+        "DIAG_OFFSET=0",
+        "oa-aa-9dectosg",
+        "/work/bin/timer",
+        "/work/bin/baseline",
+        "--data",
+        "/data",
+        "--out",
+        "/work/outputs/aa-6-B"
+      ],
+      "startedAt": "2026-11-01T16:32:07.100288+00:00",
+      "exitStatus": 0,
+      "stdout": "{\"wallSeconds\":1.219903634,\"userSeconds\":1.174442000,\"systemSeconds\":0.118716000,\"maxRssKiB\":32712,\"minorFaults\":8024,\"majorFaults\":0,\"voluntarySwitches\":1,\"involuntarySwitches\":103,\"exitCode\":0,\"signal\":0}\n",
+      "stderr": "",
+      "elapsedSeconds": 1.8072013839846477
+    },
+    {
+      "label": "complete program aa-6-A",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "exec",
+        "-e",
+        "DIAG_OFFSET=0",
+        "oa-aa-9dectosg",
+        "/work/bin/timer",
+        "/work/bin/baseline",
+        "--data",
+        "/data",
+        "--out",
+        "/work/outputs/aa-6-A"
+      ],
+      "startedAt": "2026-11-01T16:32:08.960122+00:00",
+      "exitStatus": 0,
+      "stdout": "{\"wallSeconds\":1.010047235,\"userSeconds\":1.009561000,\"systemSeconds\":0.063896000,\"maxRssKiB\":32800,\"minorFaults\":8028,\"majorFaults\":0,\"voluntarySwitches\":1,\"involuntarySwitches\":86,\"exitCode\":0,\"signal\":0}\n",
+      "stderr": "",
+      "elapsedSeconds": 1.5293026610161178
+    },
+    {
+      "label": "remove owned experiment container",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "rm",
+        "-f",
+        "oa-aa-9dectosg"
+      ],
+      "startedAt": "2026-11-01T16:32:10.586147+00:00",
+      "exitStatus": 0,
+      "stdout": "oa-aa-9dectosg\n",
+      "stderr": "",
+      "elapsedSeconds": 0.6634317459538579
+    }
+  ],
+  "policySha256": "3341858907f6baf03805f7cae587b1cce9006db5242d2c4749157508a51d2a93",
+  "driverSha256": "6c6a123c3262575fbc70a414c7cbc9c629032aa856d8bd6639d3f268137daa73",
+  "commonSha256": "9b808da8f18bd34d2856e5cc0ee8c0fe029621df18b380a4d56596c8957ddc91",
+  "stage": "/tmp/endpoint-lookup-9dectosg",
+  "warms": [
+    {
+      "wallSeconds": 1.017948465,
+      "userSeconds": 0.992891,
+      "systemSeconds": 0.089105,
+      "maxRssKiB": 32844,
+      "minorFaults": 8026,
+      "majorFaults": 0,
+      "voluntarySwitches": 1,
+      "involuntarySwitches": 86,
+      "exitCode": 0,
+      "signal": 0,
+      "revision": "baseline",
+      "label": "aa-warm-baseline",
+      "telemetryBefore": {
+        "/proc/loadavg": "2.20 2.35 2.32 1/510 18729\n",
+        "/proc/pressure/cpu": "some avg10=0.00 avg60=0.02 avg300=0.12 total=179856913\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390380\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907235\n"
+      },
+      "telemetryAfter": {
+        "/proc/loadavg": "2.26 2.36 2.33 1/509 18740\n",
+        "/proc/pressure/cpu": "some avg10=0.00 avg60=0.02 avg300=0.12 total=179870805\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390453\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907308\n"
+      },
+      "outputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3"
+    },
+    {
+      "wallSeconds": 0.966758382,
+      "userSeconds": 0.976781,
+      "systemSeconds": 0.050962,
+      "maxRssKiB": 32832,
+      "minorFaults": 8026,
+      "majorFaults": 0,
+      "voluntarySwitches": 1,
+      "involuntarySwitches": 81,
+      "exitCode": 0,
+      "signal": 0,
+      "revision": "candidate",
+      "label": "aa-warm-candidate",
+      "telemetryBefore": {
+        "/proc/loadavg": "2.26 2.36 2.33 2/509 18740\n",
+        "/proc/pressure/cpu": "some avg10=0.00 avg60=0.02 avg300=0.12 total=179873194\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390453\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907308\n"
+      },
+      "telemetryAfter": {
+        "/proc/loadavg": "2.26 2.36 2.33 2/510 18750\n",
+        "/proc/pressure/cpu": "some avg10=0.18 avg60=0.05 avg300=0.13 total=179890155\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390510\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907365\n"
+      },
+      "outputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3"
+    }
+  ],
+  "pairs": [
+    {
+      "index": 1,
+      "order": [
+        "A",
+        "B"
+      ],
+      "runs": [
+        {
+          "wallSeconds": 1.138362335,
+          "userSeconds": 1.103753,
+          "systemSeconds": 0.10613,
+          "maxRssKiB": 32888,
+          "minorFaults": 8026,
+          "majorFaults": 0,
+          "voluntarySwitches": 1,
+          "involuntarySwitches": 98,
+          "exitCode": 0,
+          "signal": 0,
+          "revision": "baseline",
+          "label": "aa-1-A",
+          "telemetryBefore": {
+            "/proc/loadavg": "2.26 2.36 2.33 1/510 18750\n",
+            "/proc/pressure/cpu": "some avg10=0.18 avg60=0.05 avg300=0.13 total=179890342\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390510\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907365\n"
+          },
+          "telemetryAfter": {
+            "/proc/loadavg": "2.26 2.36 2.33 1/510 18760\n",
+            "/proc/pressure/cpu": "some avg10=0.32 avg60=0.08 avg300=0.13 total=179915739\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390510\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907365\n"
+          },
+          "outputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3",
+          "comparisonLabel": "A"
+        },
+        {
+          "wallSeconds": 1.04369305,
+          "userSeconds": 1.041524,
+          "systemSeconds": 0.068017,
+          "maxRssKiB": 32708,
+          "minorFaults": 8024,
+          "majorFaults": 0,
+          "voluntarySwitches": 1,
+          "involuntarySwitches": 91,
+          "exitCode": 0,
+          "signal": 0,
+          "revision": "baseline",
+          "label": "aa-1-B",
+          "telemetryBefore": {
+            "/proc/loadavg": "2.26 2.36 2.33 1/510 18760\n",
+            "/proc/pressure/cpu": "some avg10=0.32 avg60=0.08 avg300=0.13 total=179919318\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390510\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907365\n"
+          },
+          "telemetryAfter": {
+            "/proc/loadavg": "2.32 2.37 2.33 1/510 18770\n",
+            "/proc/pressure/cpu": "some avg10=0.45 avg60=0.11 avg300=0.14 total=179943651\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390738\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907585\n"
+          },
+          "outputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3",
+          "comparisonLabel": "B"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "order": [
+        "B",
+        "A"
+      ],
+      "runs": [
+        {
+          "wallSeconds": 0.953502344,
+          "userSeconds": 0.93261,
+          "systemSeconds": 0.080911,
+          "maxRssKiB": 32844,
+          "minorFaults": 8027,
+          "majorFaults": 0,
+          "voluntarySwitches": 1,
+          "involuntarySwitches": 81,
+          "exitCode": 0,
+          "signal": 0,
+          "revision": "baseline",
+          "label": "aa-2-B",
+          "telemetryBefore": {
+            "/proc/loadavg": "2.32 2.37 2.33 1/510 18770\n",
+            "/proc/pressure/cpu": "some avg10=0.45 avg60=0.11 avg300=0.14 total=179946397\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390738\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907585\n"
+          },
+          "telemetryAfter": {
+            "/proc/loadavg": "2.32 2.37 2.33 1/510 18780\n",
+            "/proc/pressure/cpu": "some avg10=0.55 avg60=0.14 avg300=0.14 total=179962624\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390738\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907585\n"
+          },
+          "outputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3",
+          "comparisonLabel": "B"
+        },
+        {
+          "wallSeconds": 1.087993003,
+          "userSeconds": 1.07473,
+          "systemSeconds": 0.076463,
+          "maxRssKiB": 32584,
+          "minorFaults": 8025,
+          "majorFaults": 0,
+          "voluntarySwitches": 2,
+          "involuntarySwitches": 109,
+          "exitCode": 0,
+          "signal": 0,
+          "revision": "baseline",
+          "label": "aa-2-A",
+          "telemetryBefore": {
+            "/proc/loadavg": "2.32 2.37 2.33 1/510 18780\n",
+            "/proc/pressure/cpu": "some avg10=0.55 avg60=0.14 avg300=0.14 total=179962803\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390738\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907585\n"
+          },
+          "telemetryAfter": {
+            "/proc/loadavg": "2.32 2.37 2.33 1/503 18790\n",
+            "/proc/pressure/cpu": "some avg10=0.55 avg60=0.14 avg300=0.14 total=179986964\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390738\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907585\n"
+          },
+          "outputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3",
+          "comparisonLabel": "A"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "order": [
+        "A",
+        "B"
+      ],
+      "runs": [
+        {
+          "wallSeconds": 0.971957839,
+          "userSeconds": 0.95644,
+          "systemSeconds": 0.076515,
+          "maxRssKiB": 32636,
+          "minorFaults": 8024,
+          "majorFaults": 0,
+          "voluntarySwitches": 1,
+          "involuntarySwitches": 82,
+          "exitCode": 0,
+          "signal": 0,
+          "revision": "baseline",
+          "label": "aa-3-A",
+          "telemetryBefore": {
+            "/proc/loadavg": "2.32 2.37 2.33 1/503 18790\n",
+            "/proc/pressure/cpu": "some avg10=0.55 avg60=0.14 avg300=0.14 total=179987128\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390738\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907585\n"
+          },
+          "telemetryAfter": {
+            "/proc/loadavg": "2.38 2.38 2.33 1/502 18800\n",
+            "/proc/pressure/cpu": "some avg10=0.63 avg60=0.17 avg300=0.15 total=180007491\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390918\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907761\n"
+          },
+          "outputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3",
+          "comparisonLabel": "A"
+        },
+        {
+          "wallSeconds": 1.076315116,
+          "userSeconds": 1.075346,
+          "systemSeconds": 0.068006,
+          "maxRssKiB": 32840,
+          "minorFaults": 8028,
+          "majorFaults": 0,
+          "voluntarySwitches": 1,
+          "involuntarySwitches": 89,
+          "exitCode": 0,
+          "signal": 0,
+          "revision": "baseline",
+          "label": "aa-3-B",
+          "telemetryBefore": {
+            "/proc/loadavg": "2.38 2.38 2.33 2/502 18800\n",
+            "/proc/pressure/cpu": "some avg10=0.63 avg60=0.17 avg300=0.15 total=180007491\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390918\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907761\n"
+          },
+          "telemetryAfter": {
+            "/proc/loadavg": "2.38 2.38 2.33 1/502 18810\n",
+            "/proc/pressure/cpu": "some avg10=0.69 avg60=0.20 avg300=0.16 total=180033524\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390918\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907761\n"
+          },
+          "outputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3",
+          "comparisonLabel": "B"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "order": [
+        "B",
+        "A"
+      ],
+      "runs": [
+        {
+          "wallSeconds": 1.157368627,
+          "userSeconds": 1.080214,
+          "systemSeconds": 0.144595,
+          "maxRssKiB": 32840,
+          "minorFaults": 8029,
+          "majorFaults": 0,
+          "voluntarySwitches": 1,
+          "involuntarySwitches": 98,
+          "exitCode": 0,
+          "signal": 0,
+          "revision": "baseline",
+          "label": "aa-4-B",
+          "telemetryBefore": {
+            "/proc/loadavg": "2.38 2.38 2.33 1/502 18810\n",
+            "/proc/pressure/cpu": "some avg10=0.69 avg60=0.20 avg300=0.16 total=180033662\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390918\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907761\n"
+          },
+          "telemetryAfter": {
+            "/proc/loadavg": "2.38 2.38 2.33 1/503 18820\n",
+            "/proc/pressure/cpu": "some avg10=0.75 avg60=0.23 avg300=0.16 total=180060426\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390956\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907799\n"
+          },
+          "outputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3",
+          "comparisonLabel": "B"
+        },
+        {
+          "wallSeconds": 1.076111855,
+          "userSeconds": 1.081591,
+          "systemSeconds": 0.059381,
+          "maxRssKiB": 32760,
+          "minorFaults": 8026,
+          "majorFaults": 0,
+          "voluntarySwitches": 1,
+          "involuntarySwitches": 92,
+          "exitCode": 0,
+          "signal": 0,
+          "revision": "baseline",
+          "label": "aa-4-A",
+          "telemetryBefore": {
+            "/proc/loadavg": "2.38 2.38 2.33 1/503 18820\n",
+            "/proc/pressure/cpu": "some avg10=0.75 avg60=0.23 avg300=0.16 total=180060498\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882390956\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857907799\n"
+          },
+          "telemetryAfter": {
+            "/proc/loadavg": "2.43 2.39 2.34 2/503 18830\n",
+            "/proc/pressure/cpu": "some avg10=0.79 avg60=0.25 avg300=0.17 total=180082701\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882391385\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857908224\n"
+          },
+          "outputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3",
+          "comparisonLabel": "A"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "order": [
+        "A",
+        "B"
+      ],
+      "runs": [
+        {
+          "wallSeconds": 1.103201087,
+          "userSeconds": 1.058644,
+          "systemSeconds": 0.110099,
+          "maxRssKiB": 32836,
+          "minorFaults": 8026,
+          "majorFaults": 0,
+          "voluntarySwitches": 1,
+          "involuntarySwitches": 111,
+          "exitCode": 0,
+          "signal": 0,
+          "revision": "baseline",
+          "label": "aa-5-A",
+          "telemetryBefore": {
+            "/proc/loadavg": "2.43 2.39 2.34 1/503 18830\n",
+            "/proc/pressure/cpu": "some avg10=0.79 avg60=0.25 avg300=0.17 total=180082886\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882391385\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857908224\n"
+          },
+          "telemetryAfter": {
+            "/proc/loadavg": "2.43 2.39 2.34 1/500 18840\n",
+            "/proc/pressure/cpu": "some avg10=0.83 avg60=0.28 avg300=0.17 total=180108253\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882391385\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857908224\n"
+          },
+          "outputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3",
+          "comparisonLabel": "A"
+        },
+        {
+          "wallSeconds": 1.13972395,
+          "userSeconds": 1.148148,
+          "systemSeconds": 0.059533,
+          "maxRssKiB": 32708,
+          "minorFaults": 8024,
+          "majorFaults": 0,
+          "voluntarySwitches": 1,
+          "involuntarySwitches": 118,
+          "exitCode": 0,
+          "signal": 0,
+          "revision": "baseline",
+          "label": "aa-5-B",
+          "telemetryBefore": {
+            "/proc/loadavg": "2.43 2.39 2.34 3/500 18840\n",
+            "/proc/pressure/cpu": "some avg10=0.83 avg60=0.28 avg300=0.17 total=180108316\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882391385\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857908224\n"
+          },
+          "telemetryAfter": {
+            "/proc/loadavg": "2.43 2.39 2.34 1/500 18850\n",
+            "/proc/pressure/cpu": "some avg10=0.86 avg60=0.30 avg300=0.18 total=180126575\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882391686\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857908513\n"
+          },
+          "outputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3",
+          "comparisonLabel": "B"
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "order": [
+        "B",
+        "A"
+      ],
+      "runs": [
+        {
+          "wallSeconds": 1.219903634,
+          "userSeconds": 1.174442,
+          "systemSeconds": 0.118716,
+          "maxRssKiB": 32712,
+          "minorFaults": 8024,
+          "majorFaults": 0,
+          "voluntarySwitches": 1,
+          "involuntarySwitches": 103,
+          "exitCode": 0,
+          "signal": 0,
+          "revision": "baseline",
+          "label": "aa-6-B",
+          "telemetryBefore": {
+            "/proc/loadavg": "2.43 2.39 2.34 1/500 18850\n",
+            "/proc/pressure/cpu": "some avg10=0.86 avg60=0.30 avg300=0.18 total=180126730\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882391686\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857908513\n"
+          },
+          "telemetryAfter": {
+            "/proc/loadavg": "2.47 2.40 2.34 1/500 18860\n",
+            "/proc/pressure/cpu": "some avg10=0.70 avg60=0.29 avg300=0.18 total=180145379\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882391686\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857908513\n"
+          },
+          "outputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3",
+          "comparisonLabel": "B"
+        },
+        {
+          "wallSeconds": 1.010047235,
+          "userSeconds": 1.009561,
+          "systemSeconds": 0.063896,
+          "maxRssKiB": 32800,
+          "minorFaults": 8028,
+          "majorFaults": 0,
+          "voluntarySwitches": 1,
+          "involuntarySwitches": 86,
+          "exitCode": 0,
+          "signal": 0,
+          "revision": "baseline",
+          "label": "aa-6-A",
+          "telemetryBefore": {
+            "/proc/loadavg": "2.47 2.40 2.34 1/500 18860\n",
+            "/proc/pressure/cpu": "some avg10=0.70 avg60=0.29 avg300=0.18 total=180145399\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882391686\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857908513\n"
+          },
+          "telemetryAfter": {
+            "/proc/loadavg": "2.47 2.40 2.34 1/503 18873\n",
+            "/proc/pressure/cpu": "some avg10=0.76 avg60=0.31 avg300=0.18 total=180161249\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+            "/proc/pressure/io": "some avg10=0.00 avg60=0.00 avg300=0.04 total=1882391739\nfull avg10=0.00 avg60=0.00 avg300=0.04 total=1857908566\n"
+          },
+          "outputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3",
+          "comparisonLabel": "A"
+        }
+      ]
+    }
+  ],
+  "binaryIdentities": {
+    "baseline": "691f754f912f08337c48c35fe48206e759621c35add4badceacb5e6877f94c6b",
+    "candidate": "dddd0529bfccf36362146a19419aac770fd740b73fdc8e03d0f070b16fcb7104"
+  },
+  "identicalBaselineUnderBothLabels": true,
+  "finishedAt": "2026-11-01T16:32:10.563105+00:00"
+}

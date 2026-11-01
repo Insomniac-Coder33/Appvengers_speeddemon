@@ -1,0 +1,371 @@
+{
+  "startedAt": "2026-11-01T16:20:56.553095+00:00",
+  "mode": "candidate-build",
+  "completed": true,
+  "commands": [
+    {
+      "label": "candidate clean offline verified recipe",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "build",
+        "--pull=false",
+        "--no-cache",
+        "--network=none",
+        "--platform=linux/amd64",
+        "--iidfile",
+        "/tmp/endpoint-lookup-9dectosg/candidate-image-id",
+        "/tmp/endpoint-lookup-9dectosg/candidate-context"
+      ],
+      "startedAt": "2026-11-01T16:20:57.162308+00:00",
+      "exitStatus": 0,
+      "stdout": "",
+      "stderr": "#0 building with \"default\" instance using docker driver\n\n#1 [internal] load build definition from Dockerfile\n#1 transferring dockerfile: 624B done\n#1 DONE 0.1s\n\n#2 [internal] load metadata for docker.io/library/gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce\n#2 DONE 0.0s\n\n#3 [internal] load metadata for docker.io/library/debian:13-slim@sha256:62bd423aeee912639ca8ee681c2b762cb3e25137e0a92b20be455898a9f034ad\n#3 DONE 0.0s\n\n#4 [internal] load .dockerignore\n#4 transferring context: 77B done\n#4 DONE 0.1s\n\n#5 [internal] load build context\n#5 DONE 0.0s\n\n#6 [stage-1 1/5] FROM docker.io/library/debian:13-slim@sha256:62bd423aeee912639ca8ee681c2b762cb3e25137e0a92b20be455898a9f034ad\n#6 resolve docker.io/library/debian:13-slim@sha256:62bd423aeee912639ca8ee681c2b762cb3e25137e0a92b20be455898a9f034ad\n#6 resolve docker.io/library/debian:13-slim@sha256:62bd423aeee912639ca8ee681c2b762cb3e25137e0a92b20be455898a9f034ad 0.0s done\n#6 DONE 0.0s\n\n#7 [stage-1 2/5] WORKDIR /app\n#7 CACHED\n\n#8 [build 1/5] FROM docker.io/library/gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce\n#8 resolve docker.io/library/gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce 0.0s done\n#8 DONE 0.1s\n\n#9 [build 2/5] WORKDIR /app\n#9 CACHED\n\n#5 [internal] load build context\n#5 transferring context: 19.59kB done\n#5 DONE 0.1s\n\n#10 [build 3/5] COPY build.sh /app/build.sh\n#10 DONE 0.0s\n\n#11 [build 4/5] COPY src/ /app/src/\n#11 DONE 0.1s\n\n#12 [build 5/5] RUN CXX=g++ sh /app/build.sh && mkdir -p /runtime && cp -L /usr/local/lib64/libstdc++.so.6 /usr/local/lib64/libgcc_s.so.1 /runtime/\n#12 DONE 2.9s\n\n#13 [stage-1 3/5] COPY --from=build /app/build/track-a /app/build/track-a\n#13 DONE 0.1s\n\n#14 [stage-1 4/5] COPY --from=build /runtime/ /usr/local/lib/\n#14 DONE 0.1s\n\n#15 [stage-1 5/5] RUN mkdir -p /data /out\n#15 DONE 0.2s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 0.3s done\n#16 exporting manifest sha256:7ccc78dc03fc66137e23096cea65704623ce2d1953c0e0ceca77ebbb64d4fd05 0.0s done\n#16 exporting config sha256:4fc7655c54c56604dcfb798b85ccca007a663b3433dd64409f28918c8b5c77d1 0.0s done\n#16 exporting attestation manifest sha256:b9734122b975031bc805c0fe5e414645e6d638c5e0e3c4dbd5dcf18fbfba5ee1 0.0s done\n#16 exporting manifest list sha256:140219ac9eae0f63030ed84bd5a103731ad1b6e8975b1ba2b1c5d287b3331480\n#16 exporting manifest list sha256:140219ac9eae0f63030ed84bd5a103731ad1b6e8975b1ba2b1c5d287b3331480 0.0s done\n#16 naming to moby-dangling@sha256:140219ac9eae0f63030ed84bd5a103731ad1b6e8975b1ba2b1c5d287b3331480 done\n#16 unpacking to moby-dangling@sha256:140219ac9eae0f63030ed84bd5a103731ad1b6e8975b1ba2b1c5d287b3331480\n#16 unpacking to moby-dangling@sha256:140219ac9eae0f63030ed84bd5a103731ad1b6e8975b1ba2b1c5d287b3331480 0.2s done\n#16 DONE 0.6s\n",
+      "elapsedSeconds": 6.777938001032453
+    },
+    {
+      "label": "candidate final image inspect",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "image",
+        "inspect",
+        "sha256:140219ac9eae0f63030ed84bd5a103731ad1b6e8975b1ba2b1c5d287b3331480"
+      ],
+      "startedAt": "2026-11-01T16:21:03.954549+00:00",
+      "exitStatus": 0,
+      "stdout": "[\n    {\n        \"Id\": \"sha256:140219ac9eae0f63030ed84bd5a103731ad1b6e8975b1ba2b1c5d287b3331480\",\n        \"RepoTags\": [],\n        \"RepoDigests\": [],\n        \"Comment\": \"buildkit.dockerfile.v0\",\n        \"Created\": \"2026-11-01T16:21:03.105311748Z\",\n        \"Config\": {\n            \"Env\": [\n                \"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\",\n                \"LD_LIBRARY_PATH=/usr/local/lib\"\n            ],\n            \"Entrypoint\": [\n                \"/app/build/track-a\"\n            ],\n            \"WorkingDir\": \"/app\"\n        },\n        \"Architecture\": \"amd64\",\n        \"Os\": \"linux\",\n        \"Size\": 31155428,\n        \"RootFS\": {\n            \"Type\": \"layers\",\n            \"Layers\": [\n                \"sha256:a70f6272827f64e1427d048ced77491aab5d64ab95725e56920802ff391197d7\",\n                \"sha256:dfe4cbad9270e3e6f5f3f4372c3c8684abc568646aba193490448ebe33dc2e48\",\n                \"sha256:d9987250d0a0d3814e0d5e361c8071472a3c7506baf81e03ddc0c1c92cbb7c63\",\n                \"sha256:b3c055c2104d4c5b179ac18957aff1fcf427428af72ea763f56c6c0a888c6987\",\n                \"sha256:e9eeae18e99dc4ea38f86fed25d5f491ccebd6a0015a224ec780b48db0102d89\"\n            ]\n        },\n        \"Metadata\": {\n            \"LastTagTime\": \"2026-11-01T16:21:03.5346175Z\"\n        },\n        \"Descriptor\": {\n            \"mediaType\": \"application/vnd.oci.image.index.v1+json\",\n            \"digest\": \"sha256:140219ac9eae0f63030ed84bd5a103731ad1b6e8975b1ba2b1c5d287b3331480\",\n            \"size\": 856\n        },\n        \"Identity\": {\n            \"Build\": [\n                {\n                    \"Ref\": \"9fvw4y0v9l1bz3azf2vw1cxrs\",\n                    \"CreatedAt\": \"2026-11-01T16:21:03.714086286Z\"\n                }\n            ]\n        }\n    }\n]\n",
+      "stderr": "",
+      "elapsedSeconds": 0.6625405149534345
+    },
+    {
+      "label": "candidate extraction create",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "create",
+        "--name",
+        "el-extract-candidate-9dectosg",
+        "sha256:140219ac9eae0f63030ed84bd5a103731ad1b6e8975b1ba2b1c5d287b3331480"
+      ],
+      "startedAt": "2026-11-01T16:21:04.663339+00:00",
+      "exitStatus": 0,
+      "stdout": "bf24925447c2b09c3cd1b01bc97ca4f2eb55e058194ae9512daaa874d196906e\n",
+      "stderr": "",
+      "elapsedSeconds": 0.47236447501927614
+    },
+    {
+      "label": "candidate executable extraction",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "cp",
+        "el-extract-candidate-9dectosg:/app/build/track-a",
+        "/tmp/endpoint-lookup-9dectosg/bin/candidate"
+      ],
+      "startedAt": "2026-11-01T16:21:05.208345+00:00",
+      "exitStatus": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsedSeconds": 0.40286382398335263
+    },
+    {
+      "label": "candidate extraction remove",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "rm",
+        "el-extract-candidate-9dectosg"
+      ],
+      "startedAt": "2026-11-01T16:21:05.661295+00:00",
+      "exitStatus": 0,
+      "stdout": "el-extract-candidate-9dectosg\n",
+      "stderr": "",
+      "elapsedSeconds": 1.8220302230329253
+    },
+    {
+      "label": "candidate dependency resolution",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network=none",
+        "--read-only",
+        "--entrypoint",
+        "ldd",
+        "sha256:140219ac9eae0f63030ed84bd5a103731ad1b6e8975b1ba2b1c5d287b3331480",
+        "/app/build/track-a"
+      ],
+      "startedAt": "2026-11-01T16:21:07.584966+00:00",
+      "exitStatus": 0,
+      "stdout": "\tlinux-vdso.so.1 (0x00007ffec6fde000)\n\tlibstdc++.so.6 => /usr/local/lib/libstdc++.so.6 (0x00007e44f1a9c000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007e44f19ab000)\n\tlibgcc_s.so.1 => /usr/local/lib/libgcc_s.so.1 (0x00007e44f197e000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007e44f178a000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007e44f1d15000)\n",
+      "stderr": "",
+      "elapsedSeconds": 0.6832176650059409
+    },
+    {
+      "label": "compile candidate-san",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--tmpfs",
+        "/tmp:rw,size=1g,exec",
+        "--mount",
+        "type=bind,source=/tmp/endpoint-lookup-9dectosg/candidate,target=/source,readonly",
+        "--mount",
+        "type=bind,source=/tmp/endpoint-lookup-9dectosg,target=/work",
+        "--workdir",
+        "/source",
+        "--entrypoint",
+        "g++",
+        "gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce",
+        "-std=c++20",
+        "-O1",
+        "-g",
+        "-fno-omit-frame-pointer",
+        "-fsanitize=address,undefined",
+        "-fno-sanitize-recover=all",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "src/main.cpp",
+        "-o",
+        "/work/bin/candidate-san"
+      ],
+      "startedAt": "2026-11-01T16:21:08.464315+00:00",
+      "exitStatus": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsedSeconds": 6.915421585959848
+    },
+    {
+      "label": "stage GCC sanitizer runtimes for diagnostic use",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network=none",
+        "--read-only",
+        "--mount",
+        "type=bind,source=/tmp/endpoint-lookup-9dectosg/san-libs,target=/out",
+        "--entrypoint",
+        "/bin/sh",
+        "gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce",
+        "-c",
+        "cp -L /usr/local/lib64/libasan.so.8 /usr/local/lib64/libubsan.so.1 /out/"
+      ],
+      "startedAt": "2026-11-01T16:21:15.456071+00:00",
+      "exitStatus": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsedSeconds": 0.8384773100260645
+    },
+    {
+      "label": "start candidate-check",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "run",
+        "-d",
+        "--name",
+        "oa-candidate-check-9dectosg",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--user=65534:65534",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--memory=8g",
+        "--memory-swap=8g",
+        "--pids-limit=512",
+        "--cpuset-cpus=0",
+        "--tmpfs",
+        "/tmp:rw,size=1g,exec",
+        "-e",
+        "TRACK=a",
+        "--mount",
+        "type=bind,source=/tmp/endpoint-lookup-9dectosg,target=/work",
+        "--mount",
+        "type=bind,source=/tmp/endpoint-lookup-9dectosg/data,target=/data,readonly",
+        "--entrypoint",
+        "/bin/sh",
+        "sha256:2e75bb3b1f674c068b58074058e99c8440390d2af6022d6731c0d5c7d19359ec",
+        "-c",
+        "exec sleep infinity"
+      ],
+      "startedAt": "2026-11-01T16:21:16.327912+00:00",
+      "exitStatus": 0,
+      "stdout": "cf40992f3c3b7e4dd9d2aee3b7f89096a3ece7bcc4dd1dbd22ee358cd2c01196\n",
+      "stderr": "",
+      "elapsedSeconds": 0.7553830380202271
+    },
+    {
+      "label": "complete program candidate-full-correctness",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "exec",
+        "-e",
+        "DIAG_OFFSET=0",
+        "oa-candidate-check-9dectosg",
+        "/work/bin/timer",
+        "/work/bin/candidate",
+        "--data",
+        "/data",
+        "--out",
+        "/work/outputs/candidate-full-correctness"
+      ],
+      "startedAt": "2026-11-01T16:21:17.106086+00:00",
+      "exitStatus": 0,
+      "stdout": "{\"wallSeconds\":1.023509006,\"userSeconds\":0.994076000,\"systemSeconds\":0.093460000,\"maxRssKiB\":32588,\"minorFaults\":8025,\"majorFaults\":0,\"voluntarySwitches\":1,\"involuntarySwitches\":86,\"exitCode\":0,\"signal\":0}\n",
+      "stderr": "",
+      "elapsedSeconds": 1.6728167409892194
+    },
+    {
+      "label": "remove owned experiment container",
+      "command": [
+        "docker",
+        "--config",
+        "/tmp/endpoint-lookup-9dectosg/docker-client",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "rm",
+        "-f",
+        "oa-candidate-check-9dectosg"
+      ],
+      "startedAt": "2026-11-01T16:21:18.840596+00:00",
+      "exitStatus": 0,
+      "stdout": "oa-candidate-check-9dectosg\n",
+      "stderr": "",
+      "elapsedSeconds": 0.48161644203355536
+    }
+  ],
+  "policySha256": "3341858907f6baf03805f7cae587b1cce9006db5242d2c4749157508a51d2a93",
+  "driverSha256": "6c6a123c3262575fbc70a414c7cbc9c629032aa856d8bd6639d3f268137daa73",
+  "commonSha256": "9b808da8f18bd34d2856e5cc0ee8c0fe029621df18b380a4d56596c8957ddc91",
+  "stage": "/tmp/endpoint-lookup-9dectosg",
+  "build": {
+    "imageId": "sha256:140219ac9eae0f63030ed84bd5a103731ad1b6e8975b1ba2b1c5d287b3331480",
+    "imageBytesLocalView": 31155428,
+    "binarySha256": "dddd0529bfccf36362146a19419aac770fd740b73fdc8e03d0f070b16fcb7104",
+    "sourceSha256": "56b4b8af4b4e364f0d2ecb21418ca6f16c838bbc18c6582443b61712361dfa87",
+    "contextManifest": [
+      {
+        "path": ".dockerignore",
+        "bytes": 37,
+        "sha256": "e4fdb61df432ee1d1f134a2a5dd8aaab82b40614f3d5577f01990f46eab2477b"
+      },
+      {
+        "path": ".speed-demon.toml",
+        "bytes": 117,
+        "sha256": "b9eb863d1bc38a067fe18e052661923324ac0c5c17b9c5eb264a284251527d4c"
+      },
+      {
+        "path": "Dockerfile",
+        "bytes": 585,
+        "sha256": "8a93f9ecd97b706b01e3700d129ab321dbdcbd0f32f9aaa397b55197d61010b9"
+      },
+      {
+        "path": "PERF.md",
+        "bytes": 288,
+        "sha256": "42c68f8e7ba3fcfbe8b6c31acb9d1dc27fe8b5aa4ea866a4422f766bd79b87f6"
+      },
+      {
+        "path": "README.md",
+        "bytes": 1590,
+        "sha256": "601c84d095fe7cfbe75947f166092b391d67e043989621fc295b6a37bcdf44a3"
+      },
+      {
+        "path": "build.sh",
+        "bytes": 147,
+        "sha256": "807197c06bf5a5ae70f8a038f7ccdb09423cc6066d47129c61be4bd3c0540702"
+      },
+      {
+        "path": "src/main.cpp",
+        "bytes": 19335,
+        "sha256": "56b4b8af4b4e364f0d2ecb21418ca6f16c838bbc18c6582443b61712361dfa87"
+      }
+    ],
+    "buildWallSeconds": 6.777938001032453,
+    "ldd": "\tlinux-vdso.so.1 (0x00007ffec6fde000)\n\tlibstdc++.so.6 => /usr/local/lib/libstdc++.so.6 (0x00007e44f1a9c000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007e44f19ab000)\n\tlibgcc_s.so.1 => /usr/local/lib/libgcc_s.so.1 (0x00007e44f197e000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007e44f178a000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007e44f1d15000)\n"
+  },
+  "sourceSha256": "56b4b8af4b4e364f0d2ecb21418ca6f16c838bbc18c6582443b61712361dfa87",
+  "binarySha256": "dddd0529bfccf36362146a19419aac770fd740b73fdc8e03d0f070b16fcb7104",
+  "imageId": "sha256:140219ac9eae0f63030ed84bd5a103731ad1b6e8975b1ba2b1c5d287b3331480",
+  "sanitizerFlags": [
+    "-std=c++20",
+    "-O1",
+    "-g",
+    "-fno-omit-frame-pointer",
+    "-fsanitize=address,undefined",
+    "-fno-sanitize-recover=all",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic"
+  ],
+  "sanitizerBinarySha256": "3eb46832026fccd4c5badf041550574416d718a983425c9842b3a02d2355925f",
+  "fullCheck": {
+    "wallSeconds": 1.023509006,
+    "userSeconds": 0.994076,
+    "systemSeconds": 0.09346,
+    "maxRssKiB": 32588,
+    "minorFaults": 8025,
+    "majorFaults": 0,
+    "voluntarySwitches": 1,
+    "involuntarySwitches": 86,
+    "exitCode": 0,
+    "signal": 0,
+    "revision": "candidate",
+    "label": "candidate-full-correctness",
+    "telemetryBefore": {
+      "/proc/loadavg": "2.88 2.53 2.29 1/513 14930\n",
+      "/proc/pressure/cpu": "some avg10=0.30 avg60=0.13 avg300=0.04 total=177279169\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+      "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+      "/proc/pressure/io": "some avg10=0.37 avg60=0.57 avg300=0.40 total=1881795356\nfull avg10=0.34 avg60=0.54 avg300=0.39 total=1857331343\n"
+    },
+    "telemetryAfter": {
+      "/proc/loadavg": "2.88 2.53 2.29 1/513 14940\n",
+      "/proc/pressure/cpu": "some avg10=0.43 avg60=0.16 avg300=0.04 total=177302442\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+      "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+      "/proc/pressure/io": "some avg10=0.31 avg60=0.55 avg300=0.40 total=1881795398\nfull avg10=0.28 avg60=0.53 avg300=0.39 total=1857331381\n"
+    },
+    "outputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3"
+  },
+  "finishedAt": "2026-11-01T16:21:18.830712+00:00"
+}

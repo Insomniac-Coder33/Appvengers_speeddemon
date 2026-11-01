@@ -1,0 +1,89 @@
+{
+  "createdAt": "2026-11-01T16:37:59.722560+00:00",
+  "decision": "Reject promotion; retain published span 76743e8. Candidate correctness-verified, performance unresolved within measured noise. No repeat campaigns.",
+  "sourceSha256": "56b4b8af4b4e364f0d2ecb21418ca6f16c838bbc18c6582443b61712361dfa87",
+  "binarySha256": "dddd0529bfccf36362146a19419aac770fd740b73fdc8e03d0f070b16fcb7104",
+  "sanitizerBinarySha256": "3eb46832026fccd4c5badf041550574416d718a983425c9842b3a02d2355925f",
+  "verificationSha256": "bb993a62c80175a89e1ccafa1cff5b62a2c2fa8af0b612bd3a8d00a860d9f7f0",
+  "testedContextManifest": [
+    {
+      "path": ".dockerignore",
+      "bytes": 37,
+      "sha256": "e4fdb61df432ee1d1f134a2a5dd8aaab82b40614f3d5577f01990f46eab2477b"
+    },
+    {
+      "path": ".speed-demon.toml",
+      "bytes": 117,
+      "sha256": "b9eb863d1bc38a067fe18e052661923324ac0c5c17b9c5eb264a284251527d4c"
+    },
+    {
+      "path": "Dockerfile",
+      "bytes": 585,
+      "sha256": "8a93f9ecd97b706b01e3700d129ab321dbdcbd0f32f9aaa397b55197d61010b9"
+    },
+    {
+      "path": "PERF.md",
+      "bytes": 288,
+      "sha256": "42c68f8e7ba3fcfbe8b6c31acb9d1dc27fe8b5aa4ea866a4422f766bd79b87f6"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1590,
+      "sha256": "601c84d095fe7cfbe75947f166092b391d67e043989621fc295b6a37bcdf44a3"
+    },
+    {
+      "path": "build.sh",
+      "bytes": 147,
+      "sha256": "807197c06bf5a5ae70f8a038f7ccdb09423cc6066d47129c61be4bd3c0540702"
+    },
+    {
+      "path": "src/main.cpp",
+      "bytes": 19335,
+      "sha256": "56b4b8af4b4e364f0d2ecb21418ca6f16c838bbc18c6582443b61712361dfa87"
+    }
+  ],
+  "finalContextManifest": [
+    {
+      "path": ".dockerignore",
+      "bytes": 37,
+      "sha256": "e4fdb61df432ee1d1f134a2a5dd8aaab82b40614f3d5577f01990f46eab2477b"
+    },
+    {
+      "path": ".speed-demon.toml",
+      "bytes": 117,
+      "sha256": "b9eb863d1bc38a067fe18e052661923324ac0c5c17b9c5eb264a284251527d4c"
+    },
+    {
+      "path": "Dockerfile",
+      "bytes": 585,
+      "sha256": "8a93f9ecd97b706b01e3700d129ab321dbdcbd0f32f9aaa397b55197d61010b9"
+    },
+    {
+      "path": "PERF.md",
+      "bytes": 1837,
+      "sha256": "ff4fd274ddc7d8e9491550faf47a6be09ffb15a4e22fa12e22187438719e56ef"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1590,
+      "sha256": "601c84d095fe7cfbe75947f166092b391d67e043989621fc295b6a37bcdf44a3"
+    },
+    {
+      "path": "build.sh",
+      "bytes": 147,
+      "sha256": "807197c06bf5a5ae70f8a038f7ccdb09423cc6066d47129c61be4bd3c0540702"
+    },
+    {
+      "path": "src/main.cpp",
+      "bytes": 19335,
+      "sha256": "56b4b8af4b4e364f0d2ecb21418ca6f16c838bbc18c6582443b61712361dfa87"
+    }
+  ],
+  "documentationOnlyAfterVerification": [
+    "PERF.md"
+  ],
+  "testSha256": "e32b11a337052042ba389097c04fa034fc0ccbaa33aadacfe9f77dc169d86561",
+  "pairResultsSha256": "14c56282b5e586e2e70f18c562cf032fd91bf3c042c93b4ca00ef7cefb8ef3f3",
+  "aaResultsSha256": "01a6ae0ba7cd62d133ededd101a8fa465383e30106f62c1d80237ea1bfdaf936",
+  "memoryResultsSha256": "6a3a60280acad760b04c484a8f829cc556d3e38c3640375278fc0cf48f59443f"
+}
