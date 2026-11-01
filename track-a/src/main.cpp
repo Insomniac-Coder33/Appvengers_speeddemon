@@ -34,52 +34,36 @@ std::uint64_t parse_unsigned_option(std::string_view text) {
 
 Options parse_options(int argc, char** argv) {
     Options options;
-    bool contract_seen = false;
-    bool input_seen = false;
-    bool output_seen = false;
-    bool buffer_seen = false;
+    fs::path data = "/data", out = "/out";
+    bool data_seen = false, out_seen = false, buffer_seen = false;
     for (int i = 1; i < argc; ++i) {
         const std::string_view name = argv[i];
-        if (name != "--contract" && name != "--input" &&
-            name != "--output" && name != "--buffer-size") {
+        if (name != "--data" && name != "--out" && name != "--buffer-size") {
             throw std::invalid_argument("unknown option: " + std::string(name));
         }
-        if (i + 1 == argc) {
+        if (++i == argc || std::string_view(argv[i]).empty()) {
             throw std::invalid_argument("missing value for " + std::string(name));
         }
-        const std::string_view value = argv[++i];
-        if (name == "--contract") {
-            if (contract_seen || value != "local-v1") {
-                throw std::invalid_argument("--contract must appear once with value local-v1");
-            }
-            contract_seen = true;
-        } else if (name == "--input") {
-            if (input_seen || value.empty()) {
-                throw std::invalid_argument("--input must appear once with a nonempty path");
-            }
-            input_seen = true;
-            options.input = argv[i];
-        } else if (name == "--output") {
-            if (output_seen || value.empty()) {
-                throw std::invalid_argument("--output must appear once with a nonempty path");
-            }
-            output_seen = true;
-            options.output = argv[i];
+        if (name == "--data") {
+            if (data_seen) throw std::invalid_argument("duplicate --data");
+            data_seen = true;
+            data = argv[i];
+        } else if (name == "--out") {
+            if (out_seen) throw std::invalid_argument("duplicate --out");
+            out_seen = true;
+            out = argv[i];
         } else {
-            if (buffer_seen) {
-                throw std::invalid_argument("--buffer-size must appear at most once");
-            }
+            if (buffer_seen) throw std::invalid_argument("duplicate --buffer-size");
             buffer_seen = true;
-            const auto size = parse_unsigned_option(value);
+            const auto size = parse_unsigned_option(argv[i]);
             if (size < 1 || size > 16777216) {
                 throw std::invalid_argument("--buffer-size must be between 1 and 16777216");
             }
             options.buffer_size = static_cast<std::size_t>(size);
         }
     }
-    if (!contract_seen || !input_seen || !output_seen) {
-        throw std::invalid_argument("--contract local-v1, --input and --output are required");
-    }
+    options.input = data / "requests.log";
+    options.output = out / "summary.txt";
     return options;
 }
 
@@ -100,7 +84,7 @@ void protect_input(const fs::path& input, const fs::path& output) {
     }
 }
 
-// This is the provisional local-v1 timestamp policy, not an official contract.
+// Official fixed-width UTC timestamp; validate real Gregorian dates as well.
 std::uint32_t parse_timestamp_hour(std::string_view text) {
     if (text.size() != 27 || text[4] != '-' || text[7] != '-' ||
         text[10] != 'T' || text[13] != ':' || text[16] != ':' ||
@@ -126,7 +110,7 @@ std::uint32_t parse_timestamp_hour(std::string_view text) {
     static_cast<void>(digits(20, 6));
     if (year < 1 || month < 1 || month > 12 || hour > 23 ||
         minute > 59 || second > 59) {
-        throw std::invalid_argument("timestamp component is outside the local-v1 range");
+        throw std::invalid_argument("timestamp component is outside the timestamp range");
     }
     constexpr std::array<unsigned, 12> days = {
         31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -141,11 +125,11 @@ std::uint32_t parse_timestamp_hour(std::string_view text) {
 struct HourCounters {
     std::uint64_t requests = 0;
     std::uint64_t errors = 0;
+    std::vector<std::uint32_t> latencies;
 };
 
 struct EndpointState {
     const std::string* name;
-    std::vector<std::uint32_t> latencies;
 };
 
 void append_latency(std::vector<std::uint32_t>& values, std::uint32_t value) {
@@ -178,15 +162,15 @@ public:
             const auto id = static_cast<std::uint32_t>(endpoints.size());
             found = endpoint_ids_.emplace(endpoint, id).first;
             // Unordered-map key references survive rehash. Keys are never erased.
-            endpoints.push_back(EndpointState{&found->first, {}});
+            endpoints.push_back(EndpointState{&found->first});
         }
         const auto id = found->second;
-        append_latency(endpoints[id].latencies, latency);
         const auto key = (static_cast<std::uint64_t>(id) << 32) | hour;
         auto& counters = hours[key];
         if (counters.requests == std::numeric_limits<std::uint64_t>::max()) {
             throw std::overflow_error("hourly request count overflow");
         }
+        append_latency(counters.latencies, latency);
         ++counters.requests;
         if (status >= 500 && status <= 599) {
             if (counters.errors == std::numeric_limits<std::uint64_t>::max()) {
@@ -208,26 +192,13 @@ public:
     explicit Parser(Aggregates& aggregates) : aggregates_(aggregates) {}
 
     void consume(unsigned char byte) {
-        if (pending_cr_) {
-            if (byte != '\n') {
-                fail("CR must be followed by LF");
-            }
-            pending_cr_ = false;
-            finish_record();
-            return;
-        }
-        if (byte == '\r') {
-            pending_cr_ = true;
-            return;
-        }
+        if (byte == '\r') fail("CR is outside the official LF-only grammar");
         if (byte == '\n') {
             finish_record();
             return;
         }
         if (byte == ' ') {
-            if (between_fields_) {
-                return;
-            }
+            if (between_fields_) fail("fields require exactly one space");
             if (!field_has_bytes_) {
                 fail("leading spaces or an empty record are not allowed");
             }
@@ -251,22 +222,30 @@ public:
                 fail("timestamp is longer than 27 bytes");
             }
             timestamp_[timestamp_size_++] = static_cast<char>(byte);
+        } else if (field_ == 1) {
+            if (method_.size() == 7) fail("method is too long");
+            method_.push_back(static_cast<char>(byte));
         } else if (field_ == 2) {
+            const bool allowed = (byte >= 'A' && byte <= 'Z') ||
+                (byte >= 'a' && byte <= 'z') || (byte >= '0' && byte <= '9') ||
+                byte == '/' || byte == '-' || byte == '_' || byte == '.' ||
+                byte == '{' || byte == '}' || byte == ':';
+            if (!allowed || endpoint_.size() == 125 || (endpoint_.empty() && byte != '/')) {
+                fail("endpoint is outside the official grammar");
+            }
             endpoint_.push_back(static_cast<char>(byte));
         } else if (field_ == 3) {
-            accumulate_number(byte, status_, std::numeric_limits<std::uint16_t>::max());
+            ++status_digits_;
+            accumulate_number(byte, status_, 599);
         } else if (field_ == 4) {
+            if (latency_digits_ != 0 && latency_leading_zero_) fail("leading latency zero");
+            if (latency_digits_++ == 0) latency_leading_zero_ = byte == '0';
             accumulate_number(byte, latency_, std::numeric_limits<std::uint32_t>::max());
         }
     }
 
     void finish_input() {
-        if (pending_cr_) {
-            fail("input ends with a bare CR");
-        }
-        if (record_started_) {
-            finish_record();
-        }
+        if (record_started_) fail("official records require a final LF");
     }
 
 private:
@@ -295,6 +274,12 @@ private:
             } catch (const std::invalid_argument& error) {
                 fail(error.what());
             }
+        } else if (field_ == 1) {
+            if (method_ != "GET" && method_ != "POST" && method_ != "PUT" &&
+                method_ != "PATCH" && method_ != "DELETE" && method_ != "HEAD" &&
+                method_ != "OPTIONS") fail("unknown HTTP method");
+        } else if (field_ == 3) {
+            if (status_digits_ != 3 || status_ < 100) fail("status must be 100..599");
         }
     }
 
@@ -312,6 +297,9 @@ private:
         record_started_ = false;
         timestamp_size_ = 0;
         endpoint_.clear();
+        method_.clear();
+        status_digits_ = latency_digits_ = 0;
+        latency_leading_zero_ = false;
         status_ = 0;
         latency_ = 0;
         if (line_ == std::numeric_limits<std::uint64_t>::max()) {
@@ -324,6 +312,9 @@ private:
     std::array<char, 27> timestamp_{};
     std::size_t timestamp_size_ = 0;
     std::string endpoint_;
+    std::string method_;
+    unsigned status_digits_ = 0, latency_digits_ = 0;
+    bool latency_leading_zero_ = false;
     std::uint32_t hour_ = 0;
     std::uint32_t status_ = 0;
     std::uint32_t latency_ = 0;
@@ -332,7 +323,6 @@ private:
     bool field_has_bytes_ = false;
     bool between_fields_ = false;
     bool record_started_ = false;
-    bool pending_cr_ = false;
 };
 
 void ingest(const Options& options, Aggregates& aggregates) {
@@ -372,8 +362,6 @@ OutputOrder prepare_output(Aggregates& aggregates) {
     OutputOrder order;
     order.endpoints.reserve(aggregates.endpoints.size());
     for (std::size_t i = 0; i < aggregates.endpoints.size(); ++i) {
-        auto& latencies = aggregates.endpoints[i].latencies;
-        std::sort(latencies.begin(), latencies.end());
         order.endpoints.push_back(static_cast<std::uint32_t>(i));
     }
     std::sort(order.endpoints.begin(), order.endpoints.end(),
@@ -386,23 +374,23 @@ OutputOrder prepare_output(Aggregates& aggregates) {
         ranks[order.endpoints[i]] = static_cast<std::uint32_t>(i);
     }
     order.hours.reserve(aggregates.hours.size());
-    for (const auto& item : aggregates.hours) {
+    for (auto& item : aggregates.hours) {
+        std::sort(item.second.latencies.begin(), item.second.latencies.end());
         order.hours.push_back(item.first);
     }
     std::sort(order.hours.begin(), order.hours.end(),
               [&ranks](std::uint64_t left, std::uint64_t right) {
                   const auto left_rank = ranks[static_cast<std::uint32_t>(left >> 32)];
                   const auto right_rank = ranks[static_cast<std::uint32_t>(right >> 32)];
-                  if (left_rank != right_rank) {
-                      return left_rank < right_rank;
-                  }
-                  return static_cast<std::uint32_t>(left) <
-                         static_cast<std::uint32_t>(right);
+                  const auto left_hour = static_cast<std::uint32_t>(left);
+                  const auto right_hour = static_cast<std::uint32_t>(right);
+                  if (left_hour != right_hour) return left_hour < right_hour;
+                  return left_rank < right_rank;
               });
     return order;
 }
 
-// Nearest-rank integer percentiles are deliberately provisional local-v1 policy.
+// Official nearest-rank percentiles, with overflow-safe rank arithmetic.
 std::uint32_t percentile(const std::vector<std::uint32_t>& sorted, unsigned percent) {
     static_assert(sizeof(std::size_t) <= sizeof(std::uint64_t));
     if (sorted.empty() || percent == 0 || percent > 100) {
@@ -423,15 +411,6 @@ void write_number(std::ostream& output, std::uint64_t value) {
     output.write(buffer.data(), result.ptr - buffer.data());
 }
 
-void write_hex(std::ostream& output, const std::string& text) {
-    constexpr char digits[] = "0123456789abcdef";
-    for (const char character : text) {
-        const auto byte = static_cast<unsigned char>(character);
-        output.put(digits[byte >> 4]);
-        output.put(digits[byte & 15]);
-    }
-}
-
 void write_hour(std::ostream& output, std::uint32_t hour_key) {
     std::array<char, 20> text = {
         '0', '0', '0', '0', '-', '0', '0', '-', '0', '0',
@@ -449,52 +428,44 @@ void write_hour(std::ostream& output, std::uint32_t hour_key) {
     output.write(text.data(), static_cast<std::streamsize>(text.size()));
 }
 
-void serialize_local_v1(std::ostream& output, const Aggregates& aggregates,
-                        const OutputOrder& order) {
-    output << "{\"contract\":\"local-v1\",\"endpoints\":[";
-    bool first = true;
-    for (const auto id : order.endpoints) {
-        const auto& endpoint = aggregates.endpoints[id];
-        if (!first) {
-            output.put(',');
+// Exact floor(errors * 1,000,000 / count) without overflowing uint64.
+// Binary long division keeps a remainder below count; errors <= count.
+std::uint64_t error_ppm(std::uint64_t errors, std::uint64_t count) {
+    if (count == 0 || errors > count) throw std::logic_error("invalid error fraction");
+    std::uint64_t quotient = 0, remainder = 0;
+    for (int bit = 19; bit >= 0; --bit) {
+        quotient *= 2;
+        if (remainder >= count - remainder) {
+            remainder -= count - remainder;
+            ++quotient;
+        } else remainder *= 2;
+        if ((1000000U >> bit) & 1U) {
+            if (remainder >= count - errors) {
+                remainder -= count - errors;
+                ++quotient;
+            } else remainder += errors;
         }
-        first = false;
-        output << "{\"endpoint_hex\":\"";
-        write_hex(output, *endpoint.name);
-        output << "\",\"count\":";
-        write_number(output, static_cast<std::uint64_t>(endpoint.latencies.size()));
-        output << ",\"p50_us\":";
-        write_number(output, percentile(endpoint.latencies, 50));
-        output << ",\"p95_us\":";
-        write_number(output, percentile(endpoint.latencies, 95));
-        output << ",\"p99_us\":";
-        write_number(output, percentile(endpoint.latencies, 99));
-        output.put('}');
     }
-    output << "],\"hours\":[";
-    first = true;
+    return quotient;
+}
+
+void serialize_summary(std::ostream& output, const Aggregates& aggregates,
+                       const OutputOrder& order) {
     for (const auto key : order.hours) {
+        const auto& group = aggregates.hours.at(key);
         const auto id = static_cast<std::uint32_t>(key >> 32);
-        const auto& counters = aggregates.hours.at(key);
-        if (!first) {
-            output.put(',');
-        }
-        first = false;
-        output << "{\"endpoint_hex\":\"";
-        write_hex(output, *aggregates.endpoints[id].name);
-        output << "\",\"hour_utc\":\"";
         write_hour(output, static_cast<std::uint32_t>(key));
-        output << "\",\"requests\":";
-        write_number(output, counters.requests);
-        output << ",\"errors\":";
-        write_number(output, counters.errors);
-        output << ",\"rate_numerator\":";
-        write_number(output, counters.errors);
-        output << ",\"rate_denominator\":";
-        write_number(output, counters.requests);
-        output.put('}');
+        output.put(' ');
+        output << *aggregates.endpoints[id].name;
+        const std::array<std::uint64_t, 6> values = {
+            group.requests, percentile(group.latencies, 50), percentile(group.latencies, 95),
+            percentile(group.latencies, 99), group.errors, error_ppm(group.errors, group.requests)};
+        for (const auto value : values) {
+            output.put(' ');
+            write_number(output, value);
+        }
+        output.put('\n');
     }
-    output << "]}\n";
 }
 
 void write_output(const Options& options, const Aggregates& aggregates,
@@ -509,7 +480,7 @@ void write_output(const Options& options, const Aggregates& aggregates,
             throw std::runtime_error("opened output is not a regular file");
         }
         output.exceptions(std::ios::badbit | std::ios::failbit);
-        serialize_local_v1(output, aggregates, order);
+        serialize_summary(output, aggregates, order);
         output.flush();
         output.close();
     } catch (...) {
@@ -529,13 +500,13 @@ int main(int argc, char** argv) {
     try {
         if (argc == 2 && std::string_view(argv[1]) == "--help") {
             std::cout
-                << "Usage: track-a --contract local-v1 --input PATH --output PATH "
-                   "[--buffer-size N]\n"
-                   "Provisional local contract only. Buffer size: 1..16777216; "
-                   "default 1048576.\n";
+                << "Usage: track-a [--data DIR] [--out DIR] [--buffer-size N]\n"
+                   "Defaults: /data/requests.log -> /out/summary.txt.\n"
+                   "Buffer size: 1..16777216; default 1048576.\n";
             return 0;
         }
         const auto options = parse_options(argc, argv);
+        fs::create_directories(options.output.parent_path());
         protect_input(options.input, options.output);
         Aggregates aggregates;
         ingest(options, aggregates);
