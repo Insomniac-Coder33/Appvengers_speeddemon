@@ -22,6 +22,7 @@ the offline build:
 
 ```sh
 docker pull --platform=linux/amd64 gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce
+docker pull --platform=linux/amd64 debian:13-slim@sha256:62bd423aeee912639ca8ee681c2b762cb3e25137e0a92b20be455898a9f034ad
 TRACK_A_DATA=/absolute/path/to/full-seed1
 python3 check.py a --data "$TRACK_A_DATA" --expected 495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3
 ```
@@ -77,3 +78,14 @@ Record actual board run IDs and measurements in PERF.md when available. The owne
 has reported organizer permission for early development; the exact exception
 scope and submission declaration have not been independently checked here.
 This package does not claim that all development began after kickoff.
+
+## Board image-size repair
+
+The initial scalar commit 3ce1131 failed only the board image-size gate before
+execution: 2,176,579,120 bytes versus the 2,147,483,648-byte cap. Local content-store
+Size and apparent-root figures underestimated the board's cumulative layer size.
+Both scalar and span now use this identical two-stage GCC15/Debian13 slim recipe.
+Compiler flags and each revision's solver bytes remain unchanged. Required GCC
+standard runtime libraries are copied from the pinned compiler stage with links
+dereferenced. No compiler build history/layers are inherited by the runtime stage.
+This is a packaging compatibility repair, not a solver optimization or speedup.

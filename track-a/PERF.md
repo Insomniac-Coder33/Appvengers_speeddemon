@@ -2,9 +2,10 @@
 
 ## Official board results
 
-**No official board run has been performed for this package.** Run ID, runtime,
-score and official memory measurement are unavailable. No speedup is claimed.
-The local checks below are correctness/packaging evidence, not board results.
+**No scored scalar baseline is available yet.** The actual initial board run
+`run-c3de49dcc0ea` failed image-size before execution; no runtime, memory, S, D or K
+was produced. Its failure and the common runtime repair are recorded below.
+Local checks remain separate from scored board results.
 
 ## Local development history
 
@@ -88,3 +89,17 @@ or full-dataset execution, board runtime, memory measurement or speedup.
 After these checks, this documentation paragraph was added; build inputs and
 binary identity did not change. Raw validation results are preserved locally
 outside the publish inventory. No official board run ID is available.
+
+## Initial scalar board failure and common runtime repair
+
+Actual run `run-c3de49dcc0ea`, commit
+`3ce1131c9d4729771b907b0a0da28aca0a7adfa9`, failed stage `image-size`.
+Dockerfile check passed; image was 2,176,579,120 bytes, above 2,147,483,648.
+No correctness execution, runtime, memory, source count, D or K was produced.
+This failure is preserved and is not treated as a scored scalar baseline.
+Both compared revisions use the same new pinned Debian13 slim runtime stage,
+copying the executable and exact GCC15 libstdc++/libgcc dependencies from the
+compiler stage. Compiler flags and solver source bytes do not change. New runtime
+verification is required; old GCC-container passes alone do not prove this runtime.
+
+Runtime repair validation: unchanged scalar binary `d657cea38aef5b76a1a286a3f558ba5006dbec3ec5ed0505faef3ce3a612d40b`; all five production runtime library hashes match the verified GCC image. Exported final-layer total 84786688 bytes. Fresh constrained full public hash passed in the new runtime. The original source/sanitizer checks remain applicable by exact executable and production-library identities; no old image-size estimate is substituted for the board's accounting.

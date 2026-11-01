@@ -1,8 +1,9 @@
 # Appvengers — Track A (Ingest)
 
 C++20; C++ standard library only; zero direct third-party runtime dependencies.
-Licensed under [MIT](../LICENSE). The pinned GCC image supplies the compiler,
-libstdc++, libc and loader; nothing is downloaded during the offline build.
+Licensed under [MIT](../LICENSE). The pinned GCC image supplies the compiler. A pinned Debian13 slim runtime
+stage contains the executable and copied GCC libstdc++/libgcc runtime libraries,
+plus Debian libc/loader; nothing is downloaded during the offline build.
 
 ## Approach and contract
 
@@ -29,6 +30,7 @@ the subsequent build and execution are offline.
 
 ```sh
 docker pull --platform=linux/amd64 gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce
+docker pull --platform=linux/amd64 debian:13-slim@sha256:62bd423aeee912639ca8ee681c2b762cb3e25137e0a92b20be455898a9f034ad
 docker build --pull=false --no-cache --network=none --platform=linux/amd64 -t appvengers-track-a .
 ```
 
@@ -121,3 +123,14 @@ then place the reviewed files on the existing repository's `speed-demon` branch
 when authorized. Obtain genuine board results and append their actual run IDs
 and measurements to PERF.md. No publication or remote operation is implied by
 this local preparation.
+
+## Board image-size repair
+
+The initial scalar commit 3ce1131 failed only the board image-size gate before
+execution: 2,176,579,120 bytes versus the 2,147,483,648-byte cap. Local content-store
+Size and apparent-root figures underestimated the board's cumulative layer size.
+Both scalar and span now use this identical two-stage GCC15/Debian13 slim recipe.
+Compiler flags and each revision's solver bytes remain unchanged. Required GCC
+standard runtime libraries are copied from the pinned compiler stage with links
+dereferenced. No compiler build history/layers are inherited by the runtime stage.
+This is a packaging compatibility repair, not a solver optimization or speedup.
