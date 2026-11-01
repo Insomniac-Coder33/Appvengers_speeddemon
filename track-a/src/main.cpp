@@ -191,158 +191,103 @@ class Parser {
 public:
     explicit Parser(Aggregates& aggregates) : aggregates_(aggregates) {}
 
-    void consume(unsigned char byte) {
-        if (byte == '\r') fail("CR is outside the official LF-only grammar");
-        if (byte == '\n') {
-            finish_record();
-            return;
+    void consume_line(std::string_view line) {
+        // Longest legal record: 27+1+7+1+125+1+3+1+10 bytes, excluding LF.
+        if (line.empty() || line.size() > max_line_size) fail("invalid record length");
+        std::array<std::string_view, 5> fields;
+        std::size_t begin = 0;
+        for (std::size_t i = 0; i < 4; ++i) {
+            const auto end = line.find(' ', begin);
+            if (end == std::string_view::npos || end == begin) fail("five nonempty fields required");
+            fields[i] = line.substr(begin, end - begin);
+            begin = end + 1;
         }
-        if (byte == ' ') {
-            if (between_fields_) fail("fields require exactly one space");
-            if (!field_has_bytes_) {
-                fail("leading spaces or an empty record are not allowed");
-            }
-            finish_field();
-            if (field_ == 4) {
-                fail("trailing spaces or extra fields are not allowed");
-            }
-            ++field_;
-            field_has_bytes_ = false;
-            between_fields_ = true;
-            return;
+        fields[4] = line.substr(begin);
+        if (fields[4].empty() || fields[4].find(' ') != std::string_view::npos) {
+            fail("five fields separated by single spaces required");
         }
-        if (byte < 32 || byte == 127) {
-            fail("control bytes are not allowed in fields");
+        std::uint32_t hour;
+        try { hour = parse_timestamp_hour(fields[0]); }
+        catch (const std::invalid_argument& error) { fail(error.what()); }
+        const auto method = fields[1];
+        if (method != "GET" && method != "POST" && method != "PUT" &&
+            method != "PATCH" && method != "DELETE" && method != "HEAD" &&
+            method != "OPTIONS") fail("unknown HTTP method");
+        const auto endpoint = fields[2];
+        if (endpoint.empty() || endpoint.size() > 125 || endpoint.front() != '/') {
+            fail("endpoint is outside the official grammar");
         }
-        between_fields_ = false;
-        field_has_bytes_ = true;
-        record_started_ = true;
-        if (field_ == 0) {
-            if (timestamp_size_ == timestamp_.size()) {
-                fail("timestamp is longer than 27 bytes");
-            }
-            timestamp_[timestamp_size_++] = static_cast<char>(byte);
-        } else if (field_ == 1) {
-            if (method_.size() == 7) fail("method is too long");
-            method_.push_back(static_cast<char>(byte));
-        } else if (field_ == 2) {
+        for (const unsigned char byte : endpoint) {
             const bool allowed = (byte >= 'A' && byte <= 'Z') ||
                 (byte >= 'a' && byte <= 'z') || (byte >= '0' && byte <= '9') ||
                 byte == '/' || byte == '-' || byte == '_' || byte == '.' ||
                 byte == '{' || byte == '}' || byte == ':';
-            if (!allowed || endpoint_.size() == 125 || (endpoint_.empty() && byte != '/')) {
-                fail("endpoint is outside the official grammar");
-            }
-            endpoint_.push_back(static_cast<char>(byte));
-        } else if (field_ == 3) {
-            ++status_digits_;
-            accumulate_number(byte, status_, 599);
-        } else if (field_ == 4) {
-            if (latency_digits_ != 0 && latency_leading_zero_) fail("leading latency zero");
-            if (latency_digits_++ == 0) latency_leading_zero_ = byte == '0';
-            accumulate_number(byte, latency_, std::numeric_limits<std::uint32_t>::max());
+            if (!allowed) fail("endpoint is outside the official grammar");
         }
-    }
-
-    void finish_input() {
-        if (record_started_) fail("official records require a final LF");
-    }
-
-private:
-    [[noreturn]] void fail(std::string_view message) const {
-        throw std::invalid_argument("line " + std::to_string(line_) + ": " +
-                                    std::string(message));
-    }
-
-    void accumulate_number(unsigned char byte, std::uint32_t& value,
-                           std::uint32_t maximum) const {
-        if (byte < '0' || byte > '9') {
-            fail("status and latency must contain only ASCII digits");
-        }
-        const auto digit = static_cast<std::uint32_t>(byte - '0');
-        if (value > (maximum - digit) / 10) {
-            fail("numeric field exceeds its unsigned range");
-        }
-        value = value * 10 + digit;
-    }
-
-    void finish_field() {
-        if (field_ == 0) {
-            try {
-                hour_ = parse_timestamp_hour(
-                    std::string_view(timestamp_.data(), timestamp_size_));
-            } catch (const std::invalid_argument& error) {
-                fail(error.what());
-            }
-        } else if (field_ == 1) {
-            if (method_ != "GET" && method_ != "POST" && method_ != "PUT" &&
-                method_ != "PATCH" && method_ != "DELETE" && method_ != "HEAD" &&
-                method_ != "OPTIONS") fail("unknown HTTP method");
-        } else if (field_ == 3) {
-            if (status_digits_ != 3 || status_ < 100) fail("status must be 100..599");
-        }
-    }
-
-    void finish_record() {
-        if (!record_started_) {
-            fail("blank records are not allowed");
-        }
-        if (field_ != 4 || between_fields_ || !field_has_bytes_) {
-            fail("record must contain exactly five nonempty fields");
-        }
-        aggregates_.add(endpoint_, hour_, static_cast<std::uint16_t>(status_), latency_);
-        field_ = 0;
-        field_has_bytes_ = false;
-        between_fields_ = false;
-        record_started_ = false;
-        timestamp_size_ = 0;
-        endpoint_.clear();
-        method_.clear();
-        status_digits_ = latency_digits_ = 0;
-        latency_leading_zero_ = false;
-        status_ = 0;
-        latency_ = 0;
+        const auto status = number(fields[3]);
+        if (fields[3].size() != 3 || status < 100 || status > 599) fail("status must be 100..599");
+        if (fields[4].size() > 1 && fields[4].front() == '0') fail("leading latency zero");
+        const auto latency = number(fields[4]);
+        // Views never outlive this call. Aggregates still interns owning strings.
+        endpoint_.assign(endpoint);
+        aggregates_.add(endpoint_, hour, static_cast<std::uint16_t>(status), latency);
         if (line_ == std::numeric_limits<std::uint64_t>::max()) {
             throw std::overflow_error("line counter overflow");
         }
         ++line_;
     }
 
+    static constexpr std::size_t max_line_size = 176;
+
+private:
+    [[noreturn]] void fail(std::string_view message) const {
+        throw std::invalid_argument("line " + std::to_string(line_) + ": " + std::string(message));
+    }
+    std::uint32_t number(std::string_view text) const {
+        std::uint32_t value = 0;
+        const auto result = std::from_chars(text.data(), text.data() + text.size(), value);
+        if (text.empty() || result.ec != std::errc{} || result.ptr != text.data() + text.size()) {
+            fail("numeric field is outside its unsigned range");
+        }
+        return value;
+    }
     Aggregates& aggregates_;
-    std::array<char, 27> timestamp_{};
-    std::size_t timestamp_size_ = 0;
     std::string endpoint_;
-    std::string method_;
-    unsigned status_digits_ = 0, latency_digits_ = 0;
-    bool latency_leading_zero_ = false;
-    std::uint32_t hour_ = 0;
-    std::uint32_t status_ = 0;
-    std::uint32_t latency_ = 0;
     std::uint64_t line_ = 1;
-    unsigned field_ = 0;
-    bool field_has_bytes_ = false;
-    bool between_fields_ = false;
-    bool record_started_ = false;
 };
 
 void ingest(const Options& options, Aggregates& aggregates) {
     std::ifstream input(options.input, std::ios::binary);
-    if (!input) {
-        throw std::runtime_error("cannot open input file");
-    }
+    if (!input) throw std::runtime_error("cannot open input file");
     Parser parser(aggregates);
     std::vector<char> buffer(options.buffer_size);
+    std::string carry;
     while (input) {
         input.read(buffer.data(), static_cast<std::streamsize>(buffer.size()));
-        const auto count = input.gcount();
-        for (std::streamsize i = 0; i < count; ++i) {
-            parser.consume(static_cast<unsigned char>(buffer[static_cast<std::size_t>(i)]));
+        const std::string_view block(buffer.data(), static_cast<std::size_t>(input.gcount()));
+        std::size_t begin = 0;
+        while (begin < block.size()) {
+            const auto end = block.find('\n', begin);
+            const auto length = (end == std::string_view::npos ? block.size() : end) - begin;
+            if (length > Parser::max_line_size - carry.size()) {
+                throw std::invalid_argument("record exceeds the official maximum length");
+            }
+            const auto span = block.substr(begin, length);
+            if (end == std::string_view::npos) {
+                carry.append(span);
+                break;
+            }
+            if (carry.empty()) parser.consume_line(span);
+            else {
+                carry.append(span);
+                parser.consume_line(carry);
+                carry.clear();
+            }
+            begin = end + 1;
         }
     }
-    if (input.bad() || !input.eof()) {
-        throw std::runtime_error("input read failed");
-    }
-    parser.finish_input();
+    if (input.bad() || !input.eof()) throw std::runtime_error("input read failed");
+    if (!carry.empty()) throw std::invalid_argument("official records require a final LF");
 }
 
 bool unsigned_bytes_less(const std::string& left, const std::string& right) {

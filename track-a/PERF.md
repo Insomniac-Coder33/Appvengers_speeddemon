@@ -1,94 +1,105 @@
-# Track A — Appvengers verification and performance record
+# Appvengers Track A — scalar versus buffered span
 
 ## Official board results
 
-**No scored scalar baseline is available yet.** The actual initial board run
-`run-c3de49dcc0ea` failed image-size before execution; no runtime, memory, S, D or K
-was produced. Its failure and the common runtime repair are recorded below.
-Local checks remain separate from scored board results.
+The scalar revision has an actual scored public-board result. Span's result is
+pending this revision's push; no span board ID/score is invented.
 
-## Local development history
+| Revision | Run ID | Commit | Runtime s | Board memory bytes | Canonical S | D | K | Gates |
+| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Scalar | `run-824fe231c4d5` | `ed04287b7273ca4269c574bfc18bb77b5b72ccee` | 1.704431 | 40960000 | 535 | 1 | 4.357021 | all passed |
 
-Earlier scalar C++20 work used owning endpoint identity, compact uint32 latency
-storage and independent correctness checks under a provisional local-v1 contract.
-An isolated endpoint-span parser experiment was correctness-verified for that
-contract, but noisy paired timings and an identical-binary A/A control did not
-establish a repeatable improvement. It was not selected for this delivery revision.
-Early development dates/provenance are preserved in local archives; organizer
-eligibility resolution remains pending. None of those old timings establishes
-performance for the official-format package.
+Scalar board completion time: 2026-11-01T15:46:08Z. Source axes are marked measured by the
+board; memory is its cache-excluded measure, distinct from local RSS/cgroup peak.
+Exact scalar gates: `{"build": true, "check": true, "correctness": true, "sandbox": true, "timeout": true}`.
+Public feed snapshot generated 2026-11-01T15:47:04Z; full record retained
+in local comparison evidence. This is one public-seed run, not a holdout result.
 
-On 2026-10-31, the scalar baseline was integrated with the released specification:
-all statistics now belong to (hour, endpoint), summary.txt uses exact hour/endpoint
-ordering and integer error_ppm, and the official invocation needs no arguments.
-No solver optimization or timing campaign was run for this integration.
+## Preserved scalar baseline
 
-## Applicable verified revision — 2026-10-31
+Source: `e46b40c01364d334716341f713dbb5e035ce7b043ed1d42f7c849eccd026a62d`.
+Optimized binary: `d657cea38aef5b76a1a286a3f558ba5006dbec3ec5ed0505faef3ce3a612d40b`.
+Its 2026-10-31 verification passed 115 optimized + 115 ASan/UBSan cases, zero skips,
+45 official-reference comparisons per suite, 36 sanitized uint64 ppm cases, 15
+upstream Track A tests and the published full input/output hashes. The reviewed
+14-file scalar package and original verification/checkpoints remain preserved.
 
-| Identity | Value |
+## Current span implementation and identities
+
+Single-worker buffered complete-record/field spans replace per-byte Parser state
+dispatch and string append. A split record carries at most 176 bytes, derived
+from the official grammar. Views do not escape a record call; endpoints still
+become owning exact keys. Aggregation, per-(hour,endpoint) latency storage, sorting,
+integer error_ppm, deterministic output, CLI and file protections are unchanged.
+No mmap/SIMD/parallelism/PGO/catalogue or public-output special case is introduced.
+
+| Identity | Span revision |
 | --- | --- |
+| Source SHA-256 | `176e94ac440d0fa7c512ccb7221d0b0fe4d90550a6fd080d4be5f95e69b809cf` |
+| Optimized binary SHA-256 | `691f754f912f08337c48c35fe48206e759621c35add4badceacb5e6877f94c6b` |
+| Sanitizer binary SHA-256 | `00a56cff390848121823e64f177958aaeb69434a2110d06e1201cc02ea7113c7` |
 | Compiler | g++ (GCC) 15.3.0, Linux/amd64 |
-| Base image | gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce |
-| Source SHA-256 | `e46b40c01364d334716341f713dbb5e035ce7b043ed1d42f7c849eccd026a62d` |
-| Optimized binary SHA-256 | `d657cea38aef5b76a1a286a3f558ba5006dbec3ec5ed0505faef3ce3a612d40b` |
-| Sanitizer binary SHA-256 | `c92e2559c405720124e72e06fd00b0e7a9ff587c315f94d084d50c27ad933afc` |
-| Integration image ID | `sha256:481a350a96fc0d6d6cc7bc9296f6056b745267cb9b29654f24c4ab22b5a446c5` |
+| Compiler base image | gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce |
+| Runtime base image | debian:13-slim@sha256:62bd423aeee912639ca8ee681c2b762cb3e25137e0a92b20be455898a9f034ad |
 | Optimized flags | -std=c++20 -O2 -DNDEBUG -Wall -Wextra -Wpedantic |
 | Sanitizer flags | -std=c++20 -O1 -g -fno-omit-frame-pointer -fsanitize=address,undefined -fno-sanitize-recover=all -Wall -Wextra -Wpedantic |
+| Direct third-party runtime dependencies | 0; standard library only |
 
-Fresh integration evidence: **115 optimized + 115 ASan/UBSan checks**, zero skips;
-**45 official-reference differentials per suite**; **36 sanitized uint64 rate
-arithmetic comparisons**; **15 unmodified upstream Track A tests**. An independent
-histogram oracle and public hand-derived goldens checked the reference comparisons.
-Fatal sanitizer options were enabled; signals, captured-process errors and
-sanitizer diagnostics were failures, including expected-invalid cases.
+Fresh changed-revision verification: **138 optimized + 138 ASan/UBSan cases**, zero
+skips; **59 official-reference comparisons per suite**, independent histogram
+oracle, public worked/edge goldens, maximum-line and buffer boundaries, additional
+tiny seeds 3/11/42 and sample 7, growing shared-prefix groups and retained file
+alias protections. Fatal sanitizer policies reject signals, captured execution
+errors and diagnostics even in expected-invalid cases.
 
-The public full input contained 238,836,234 bytes; its SHA-256 was
-`7ec80ba45bceef51ac7f79d3a14521fc6187b2dcb87b5e5542d08063fe5d962a`.
-The output contained 126,908 lines / 10,113,024 bytes; its SHA-256 was
-`495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3`.
-Both matched the published checksums. The run used no program arguments, TRACK=a,
-uid/gid65534, readonly root and input, no network, all capabilities dropped,
-no-new-privileges, 8 GiB memory/equal memory-swap, 512 PIDs and 1 GiB /tmp.
-It exited zero without OOM or stdout/stderr and had an exactly empty filesystem diff.
+The published full input SHA-256 is
+`7ec80ba45bceef51ac7f79d3a14521fc6187b2dcb87b5e5542d08063fe5d962a`
+(238,836,234 bytes). Both revisions produced expected summary.txt SHA-256
+`495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3`
+(126,908 rows / 10,113,024 bytes). The span's fresh offline image passed the full
+no-argument run with TRACK=a, uid65534, readonly input/root, no network, 8 GiB/no
+extra swap, 512 PIDs, capabilities dropped and bounded /tmp.
 
-Local clean offline integration build: **10.809629 seconds**,
-within the 600-second cap. Docker reported image size **552,659,174 bytes**;
-unpacked apparent root size **1,535,424,675 bytes**. These are
-packaging observations, not runtime speedups or standardized board measurements.
-Process RSS and fresh cgroup memory.peak were not measured for this revision.
+## Local performance evidence — not board results
 
-## Submission packaging validation
+2026-11-01 baseline diagnostic profile identified parsing/aggregation as dominant.
+Exactly one focused candidate was implemented and six adjacent pairs measured
+serially with alternating order, identical GCC15/O2 flags, CPU 0 and warm ext4
+staging. Complete-program timing includes normal output flush/close and teardown;
+Docker startup, instrumentation and hash verification are outside paired timing.
 
-Only README/PERF, team metadata and licensing differ from the verified candidate.
-The source, Dockerfile, build.sh and .dockerignore are identical. A fresh result
-path is used for a clean offline build and focused official-invocation correctness
-smoke test of this final context. Its completed packaging results appear below. Existing optimized/sanitizer/reference/full-hash
-results are reused only after their source/build/binary identities are checked.
+| Local metric | Scalar | Span |
+| --- | ---: | ---: |
+| Median complete-program wall seconds | 1.865207 | 1.155213 |
+| Individual timing spread (range/median) | 9.92% | 23.71% |
+| Median process RSS, KiB | 32678 | 32616 |
+| Fresh-container memory.peak bytes | 41594880 | 41996288 |
+| Source bytes / physical C++ lines | 20341 / 520 | 19156 / 465 |
 
-Reproduction: see [README.md](README.md) for build, constrained execution,
-public checksums and independent reference comparison commands. The original
-verifier and raw results remain in local development archives and are excluded
-from the submission payload. No fabricated board ID is used in their place.
+All six pairs favored span: geometric paired ratio 1.577961x
+(36.63% less elapsed time), range
+1.441x..1.696x. No favorable-result reruns or second candidate.
+Timings are noisy VM observations; CPU user+system accounting exceeded monotonic
+wall time for both versions and was retained as a limitation. RSS and cgroup peak
+are separate measures; neither is substituted for board cache-excluded memory.
+Canonical source tools were unavailable locally, so raw source counts are not S.
+Source/memory-neutral estimated relative K was 1.2562x, not an official score.
 
-### Completed local final-package check — 2026-10-31T09:22:25.218375+00:00
+No additional local benchmarking is part of the board comparison. Only actual
+scored board records can establish the event K difference. See [README.md](README.md)
+for complete offline build, official invocation, checksums and reference reproduction.
 
-Clean offline rebuild from a fresh isolated track context: **9.468287
-seconds**; Docker reported size **552,659,169 bytes**. Fresh final-package
-image: `sha256:81a7c01ef7f17ef36a8b8f965bf3ce88e08abcd74aebeb2960276aa50691bc0b`. The optimized binary SHA-256 was
-`d657cea38aef5b76a1a286a3f558ba5006dbec3ec5ed0505faef3ce3a612d40b`, **identical to the verified integration executable**.
-The current allowlist check, runtime-library resolution, metadata and exact
-file-inventory audit passed. The public worked-example and empty-input smoke
-tests each passed in a separate fresh constrained uid65534 container, using the
-official no-argument entrypoint. Each exited 0, produced only the exact expected
-summary.txt, preserved its readonly input, and had an empty filesystem diff.
+## Development provenance and limitations
 
-This final packaging check reuses the unchanged revision's correctness,
-sanitizer and full-public-hash results above. It does not claim a new full-suite
-or full-dataset execution, board runtime, memory measurement or speedup.
-After these checks, this documentation paragraph was added; build inputs and
-binary identity did not change. Raw validation results are preserved locally
-outside the publish inventory. No official board run ID is available.
+Earlier local-v1 scalar and endpoint-span experiments remain preserved with their
+own contracts and noisy/inconclusive timings. They are not official-format proof.
+The owner reports organizer permission for early development; its precise exception
+scope and submission declaration remain unverified here. Existing history is
+preserved and no claim is made that all development began after kickoff.
+
+Each board push is one public-seed run, not a statistically controlled campaign or
+hidden-holdout guarantee. Compiler/platform, queue conditions, formatted S and board
+memory may differ from local results. No new optimization or track is started.
 
 ## Initial scalar board failure and common runtime repair
 
@@ -102,4 +113,11 @@ copying the executable and exact GCC15 libstdc++/libgcc dependencies from the
 compiler stage. Compiler flags and solver source bytes do not change. New runtime
 verification is required; old GCC-container passes alone do not prove this runtime.
 
-Runtime repair validation: unchanged scalar binary `d657cea38aef5b76a1a286a3f558ba5006dbec3ec5ed0505faef3ce3a612d40b`; all five production runtime library hashes match the verified GCC image. Exported final-layer total 84786688 bytes. Fresh constrained full public hash passed in the new runtime. The original source/sanitizer checks remain applicable by exact executable and production-library identities; no old image-size estimate is substituted for the board's accounting.
+## Assembled span package verification
+
+The complete submission README's six reproduction command blocks were retained.
+A fresh final-context offline GCC15 build produced the verified span binary
+`691f754f912f08337c48c35fe48206e759621c35add4badceacb5e6877f94c6b` and passed worked-example and empty-input constrained
+no-argument smoke tests. Inventory, metadata, relative links and secret-pattern
+checks passed. The changed revision's 138+138 tests and full public hash were
+reused by exact source/build/binary identity; no local benchmark was rerun.

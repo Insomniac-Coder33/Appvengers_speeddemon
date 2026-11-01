@@ -38,12 +38,13 @@ input; other inputs need their corresponding reference output hash.
 
 ## Verification status
 
-The unchanged solver and build inputs passed the documented 115 optimized and
-115 sanitizer checks, published full-output hash verification, and a subsequent
-clean final-package build and constrained smoke checks. Those completed records
-are summarized in [PERF.md](track-a/PERF.md). Adding this root checker and supporting
-files does not rerun those checks or create an official board result. Original
-development records and verification archives remain preserved in the workspace.
+The current official-format line-span solver passed 138 optimized and 138 sanitizer
+checks, 59 official-reference comparisons per suite, additional generated seeds
+and public full-output hash verification, including a clean offline image run.
+The preserved scalar predecessor has its own separate verification record.
+[PERF.md](track-a/PERF.md) distinguishes genuine board results from local evidence.
+The unchanged root checker does not turn local elapsed time into an official score.
+Original development records and verification archives remain preserved locally.
 
 ## Delivery
 
@@ -73,7 +74,8 @@ track-a/src/main.cpp
 ```
 
 Exclude generated datasets, `.out/`, compiled outputs and local caches. The Board
-app connection, repository form and authorized push are separate delivery steps.
+app connection and Track A registration have been confirmed; this package is used
+for the owner-authorized scalar-versus-span comparison on speed-demon.
 Record actual board run IDs and measurements in PERF.md when available. The owner
 has reported organizer permission for early development; the exact exception
 scope and submission declaration have not been independently checked here.
