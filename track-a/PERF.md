@@ -1,19 +1,41 @@
 # Appvengers Track A — scalar versus buffered span
 
-## Official board results
+## Completed official board comparison
 
-The scalar revision has an actual scored public-board result. Span's result is
-pending this revision's push; no span board ID/score is invented.
-
-| Revision | Run ID | Commit | Runtime s | Board memory bytes | Canonical S | D | K | Gates |
+| Revision | Run ID | Measured code commit | Runtime s | Board memory bytes | Canonical S | D | K | Gates |
 | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| Scalar | `run-824fe231c4d5` | `ed04287b7273ca4269c574bfc18bb77b5b72ccee` | 1.704431 | 40960000 | 535 | 1 | 4.357021 | all passed |
+| Scalar | `run-824fe231c4d5` | `ed04287b7273ca4269c574bfc18bb77b5b72ccee` | 1.704431 | 40960000 | 535 | 1 | 4.357021 | all five passed |
+| Span | `run-c6c0d2936de6` | `5eafb9ef402e8c9b86643ebb1db3da72ed3899da` | 0.993140 | 40919040 | 490 | 1 | 5.784751 | all five passed |
 
-Scalar board completion time: 2026-11-01T15:46:08Z. Source axes are marked measured by the
-board; memory is its cache-excluded measure, distinct from local RSS/cgroup peak.
-Exact scalar gates: `{"build": true, "check": true, "correctness": true, "sandbox": true, "timeout": true}`.
-Public feed snapshot generated 2026-11-01T15:47:04Z; full record retained
-in local comparison evidence. This is one public-seed run, not a holdout result.
+These are genuine public-seed scored records from the official feed, not local
+estimates. Each reports measured static axes and check/build/correctness/timeout/
+sandbox gates true. Scalar ended 2026-11-01T15:46:08Z; span ended 2026-11-01T15:53:34Z.
+The same pinned GCC15 build flags and repaired Debian13 runtime recipe were used.
+The initial scalar attempt `run-c3de49dcc0ea` at commit 3ce1131 failed image-size
+before execution (2,176,579,120 > 2,147,483,648 bytes) and has no K; it is not one
+of the scored comparison rows. That gate was repaired before span publication.
+
+Span/scalar K ratio: **1.327685x**, **+32.77%**. Scalar/span runtime ratio:
+**1.716204x** (41.73% less span elapsed time). Span board memory
+change: -0.10%; source count: 535 -> 490; D: 1 -> 1.
+
+Decision: retain **span**, the stronger all-gates-passing revision in this
+comparison. The follow-up documentation commit records these already measured
+code commits; it is not itself assigned one of their run IDs. Solver and build
+bytes remain those of the selected verified revision. No restoration is necessary.
+
+Limitations: one scored public-seed run per compared revision, not a controlled
+paired board campaign or hidden-holdout guarantee. Queue/reference drift and
+normal runtime variance may affect results. Local 1.58x timing and source-neutral
+K estimates remain labeled local; canonical S, board memory and K above supersede
+those proxies for this comparison. No favorable-run retries or new benchmarks
+were used to select a better reported score.
+
+Recommended next optimization: profile the selected span ingestion path, then
+test transparent string_view endpoint lookup so owning names are copied only
+when first interned, if that cost remains material. Preserve exact identity,
+bounded buffering and owning storage; measure K including canonical source cost.
+This is a recommendation only; no such change or other track was started.
 
 ## Preserved scalar baseline
 

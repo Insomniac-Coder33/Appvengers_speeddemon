@@ -154,10 +154,12 @@ standard runtime libraries are copied from the pinned compiler stage with links
 dereferenced. No compiler build history/layers are inherited by the runtime stage.
 This is a packaging compatibility repair, not a solver optimization or speedup.
 
-## Official scalar baseline result
 
-Scalar commit `ed04287b7273ca4269c574bfc18bb77b5b72ccee`, board run `run-824fe231c4d5`:
-all gates passed, 1.704431 s, 40960000 bytes board memory,
-canonical S=535, D=1, K=4.357021. This README describes
-the span revision being compared; its own board result is pending. See PERF.md
-for actual results, local comparison evidence and limitations.
+## Official board selection
+
+The completed scalar-versus-span comparison retained **span**. All official
+gates passed for both code commits. Scalar run `run-824fe231c4d5` scored K=4.357021;
+span run `run-c6c0d2936de6` scored K=5.784751. These are one public-seed run each,
+not holdout proof or a repeated benchmark campaign. The full commit/runtime/memory/
+canonical-source/D records and initial image-size failure are in [PERF.md](PERF.md).
+The documentation follow-up does not invent a new board ID for itself.

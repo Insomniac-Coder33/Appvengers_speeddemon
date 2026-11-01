@@ -91,3 +91,11 @@ Compiler flags and each revision's solver bytes remain unchanged. Required GCC
 standard runtime libraries are copied from the pinned compiler stage with links
 dereferenced. No compiler build history/layers are inherited by the runtime stage.
 This is a packaging compatibility repair, not a solver optimization or speedup.
+
+## Official board comparison completed
+
+Selected implementation: **span**. Scalar run `run-824fe231c4d5` K=4.357021;
+span run `run-c6c0d2936de6` K=5.784751; all gates passed. The code and complete
+reproduction documentation are preserved; [PERF.md](track-a/PERF.md) records exact
+measured commits and limitations. The initial single-stage image failed size and
+was repaired with the same small runtime stage before the scored comparison.
