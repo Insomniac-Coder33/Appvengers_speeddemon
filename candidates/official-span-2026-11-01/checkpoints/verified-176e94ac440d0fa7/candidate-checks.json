@@ -1,0 +1,284 @@
+{
+  "startedAt": "2026-11-01T14:47:58.100753+00:00",
+  "completed": true,
+  "passed": true,
+  "commands": [
+    {
+      "label": "start optimized correctness container",
+      "command": [
+        "docker",
+        "run",
+        "-d",
+        "--name",
+        "oa-check-optimized-p_5bvsq2",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--user=65534:65534",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--memory=8g",
+        "--memory-swap=8g",
+        "--pids-limit=512",
+        "--cpuset-cpus=0",
+        "--tmpfs",
+        "/tmp:rw,size=1g,exec",
+        "-e",
+        "TRACK=a",
+        "--mount",
+        "type=bind,source=/tmp/official-a-exp-p_5bvsq2,target=/work,readonly",
+        "--mount",
+        "type=bind,source=/tmp/official-a-exp-p_5bvsq2/checks-optimized,target=/tmp/official-a-exp-p_5bvsq2/checks-optimized",
+        "--entrypoint",
+        "/bin/sh",
+        "gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce",
+        "-c",
+        "exec sleep infinity"
+      ],
+      "startedAt": "2026-11-01T14:47:58.330495+00:00",
+      "exitStatus": 0,
+      "stdout": "7470c97d3b8f688787c9fc0013c5db5a795666d76ac91688a55acbf6153c766b\n",
+      "stderr": "",
+      "elapsedSeconds": 0.5383458670112304
+    },
+    {
+      "label": "optimized enhanced oracle/reference suite",
+      "command": [
+        "python3",
+        "-B",
+        "/mnt/c/Users/Pratik/Desktop/Speed_demon/artifacts/experiments/official-a-perf-2026-11-01/tests.py",
+        "/mnt/c/Users/Pratik/Desktop/Speed_demon/artifacts/experiments/official-a-perf-2026-11-01/container-test-wrapper.sh"
+      ],
+      "startedAt": "2026-11-01T14:47:58.908457+00:00",
+      "exitStatus": 0,
+      "stdout": "PASS 138 official integration checks; 59 reference comparisons; 0 skips\n",
+      "stderr": "",
+      "elapsedSeconds": 47.71036224998534
+    },
+    {
+      "label": "remove optimized correctness container",
+      "command": [
+        "docker",
+        "rm",
+        "-f",
+        "oa-check-optimized-p_5bvsq2"
+      ],
+      "startedAt": "2026-11-01T14:48:50.598206+00:00",
+      "exitStatus": 0,
+      "stdout": "oa-check-optimized-p_5bvsq2\n",
+      "stderr": "",
+      "elapsedSeconds": 0.4151819659746252
+    },
+    {
+      "label": "start sanitizer correctness container",
+      "command": [
+        "docker",
+        "run",
+        "-d",
+        "--name",
+        "oa-check-sanitizer-p_5bvsq2",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--user=65534:65534",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--memory=8g",
+        "--memory-swap=8g",
+        "--pids-limit=512",
+        "--cpuset-cpus=0",
+        "--tmpfs",
+        "/tmp:rw,size=1g,exec",
+        "-e",
+        "TRACK=a",
+        "--mount",
+        "type=bind,source=/tmp/official-a-exp-p_5bvsq2,target=/work,readonly",
+        "--mount",
+        "type=bind,source=/tmp/official-a-exp-p_5bvsq2/checks-sanitizer,target=/tmp/official-a-exp-p_5bvsq2/checks-sanitizer",
+        "--entrypoint",
+        "/bin/sh",
+        "gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce",
+        "-c",
+        "exec sleep infinity"
+      ],
+      "startedAt": "2026-11-01T14:48:51.180059+00:00",
+      "exitStatus": 0,
+      "stdout": "1ee25d017803fc7f989dcca8c1acb89f0898b1ea241309238b06cb72209a3d64\n",
+      "stderr": "",
+      "elapsedSeconds": 0.5354474420309998
+    },
+    {
+      "label": "sanitizer enhanced oracle/reference suite",
+      "command": [
+        "python3",
+        "-B",
+        "/mnt/c/Users/Pratik/Desktop/Speed_demon/artifacts/experiments/official-a-perf-2026-11-01/tests.py",
+        "/mnt/c/Users/Pratik/Desktop/Speed_demon/artifacts/experiments/official-a-perf-2026-11-01/container-test-wrapper.sh"
+      ],
+      "startedAt": "2026-11-01T14:48:51.798630+00:00",
+      "exitStatus": 0,
+      "stdout": "PASS 138 official integration checks; 59 reference comparisons; 0 skips\n",
+      "stderr": "",
+      "elapsedSeconds": 55.15280971000902
+    },
+    {
+      "label": "remove sanitizer correctness container",
+      "command": [
+        "docker",
+        "rm",
+        "-f",
+        "oa-check-sanitizer-p_5bvsq2"
+      ],
+      "startedAt": "2026-11-01T14:49:48.997217+00:00",
+      "exitStatus": 0,
+      "stdout": "oa-check-sanitizer-p_5bvsq2\n",
+      "stderr": "",
+      "elapsedSeconds": 0.17677247698884457
+    },
+    {
+      "label": "candidate clean standalone offline build",
+      "command": [
+        "docker",
+        "build",
+        "--pull=false",
+        "--no-cache",
+        "--network=none",
+        "--platform=linux/amd64",
+        "--iidfile",
+        "/tmp/official-a-exp-p_5bvsq2/candidate-image-id",
+        "/tmp/official-a-exp-p_5bvsq2/candidate-offline"
+      ],
+      "startedAt": "2026-11-01T14:49:49.421489+00:00",
+      "exitStatus": 0,
+      "stdout": "",
+      "stderr": "#0 building with \"default\" instance using docker driver\n\n#1 [internal] load build definition from Dockerfile\n#1 transferring dockerfile: 270B 0.0s done\n#1 DONE 0.1s\n\n#2 [internal] load metadata for docker.io/library/gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce\n<3>WSL (11606 - ) ERROR: UtilAcceptVsock:271: accept4 failed 110\n<3>WSL (11620 - ) ERROR: UtilAcceptVsock:271: accept4 failed 110\n#2 DONE 21.3s\n\n#3 [internal] load .dockerignore\n#3 transferring context: 77B done\n#3 DONE 0.0s\n\n#4 [internal] load build context\n#4 DONE 0.0s\n\n#5 [1/5] FROM docker.io/library/gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce\n#5 resolve docker.io/library/gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce\n<3>WSL (11621 - ) ERROR: UtilAcceptVsock:271: accept4 failed 110\n<3>WSL (11623 - ) ERROR: UtilAcceptVsock:271: accept4 failed 110\n#5 DONE 22.6s\n\n#5 [1/5] FROM docker.io/library/gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce\n#5 resolve docker.io/library/gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce 22.6s done\n#5 DONE 22.6s\n\n#6 [2/5] WORKDIR /app\n#6 CACHED\n\n#4 [internal] load build context\n#4 transferring context: 19.41kB 0.0s done\n#4 DONE 0.1s\n\n#7 [3/5] COPY build.sh /app/build.sh\n#7 DONE 0.0s\n\n#8 [4/5] COPY src/ /app/src/\n#8 DONE 0.1s\n\n#9 [5/5] RUN mkdir -p /data /out && CXX=g++ sh /app/build.sh\n#9 DONE 3.7s\n\n#10 exporting to image\n#10 exporting layers\n#10 exporting layers 0.2s done\n#10 exporting manifest sha256:f250adabd5a22b39e23ef0d2ab4b337c5947584bafa5a6d9f4e9c6ba7a3ca93d 0.0s done\n#10 exporting config sha256:9b8fa87d8f7b45c9d27a15a6b2ec78452180af7df0584f8ed4cbce29b20427a1 0.0s done\n#10 exporting attestation manifest sha256:7db2c6006fe49e6c7c4b6e500a1ea7abe93cdd05464bfda495e358ee47aefce7 0.0s done\n#10 exporting manifest list sha256:edf1a849fae2a3856a42870847891edb5c303dddbc12c67d199323d197ccebdb\n#10 exporting manifest list sha256:edf1a849fae2a3856a42870847891edb5c303dddbc12c67d199323d197ccebdb 0.0s done\n#10 naming to moby-dangling@sha256:edf1a849fae2a3856a42870847891edb5c303dddbc12c67d199323d197ccebdb done\n#10 unpacking to moby-dangling@sha256:edf1a849fae2a3856a42870847891edb5c303dddbc12c67d199323d197ccebdb 0.1s done\n#10 DONE 0.5s\n",
+      "elapsedSeconds": 47.847261896007694
+    },
+    {
+      "label": "candidate fresh image inspect",
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "sha256:edf1a849fae2a3856a42870847891edb5c303dddbc12c67d199323d197ccebdb"
+      ],
+      "startedAt": "2026-11-01T14:50:41.257954+00:00",
+      "exitStatus": 0,
+      "stdout": "[\n    {\n        \"Id\": \"sha256:edf1a849fae2a3856a42870847891edb5c303dddbc12c67d199323d197ccebdb\",\n        \"RepoTags\": [],\n        \"RepoDigests\": [],\n        \"Comment\": \"buildkit.dockerfile.v0\",\n        \"Created\": \"2026-11-01T14:50:40.468499041Z\",\n        \"Config\": {\n            \"Env\": [\n                \"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\",\n                \"GPG_KEYS=B215C1633BCA0477615F1B35A5B3A004745C015A \\tB3C42148A44E6983B3E4CC0793FA9B1AB75C61B8 \\t90AA470469D3965A87A5DCB494D03953902C9419 \\t80F98B2E0DAB6C8281BDF541A7C8C3B2F71EDF1C \\t7F74F97C103468EE5D750B583AB00996FC26A641 \\t33C235A34C46AA3FFB293709A328C3A2C3C45C06 \\tD3A93CAD751C2AF4F8C7AD516C35B99309B5FA62\",\n                \"GCC_MIRRORS=https://ftpmirror.gnu.org/gcc \\t\\thttps://mirrors.kernel.org/gnu/gcc \\t\\thttps://bigsearcher.com/mirrors/gcc/releases \\t\\thttp://www.netgull.com/gcc/releases \\t\\thttps://ftpmirror.gnu.org/gcc \\t\\thttps://sourceware.org/pub/gcc/releases \\t\\tftp://ftp.gnu.org/gnu/gcc\",\n                \"GCC_VERSION=15.3.0\"\n            ],\n            \"Entrypoint\": [\n                \"/app/build/track-a\"\n            ],\n            \"WorkingDir\": \"/app\"\n        },\n        \"Architecture\": \"amd64\",\n        \"Os\": \"linux\",\n        \"Size\": 552659633,\n        \"RootFS\": {\n            \"Type\": \"layers\",\n            \"Layers\": [\n                \"sha256:0fceba70669334d0c2890d8a9c5e8f0a8c153fde2d921de69084f3360e741c08\",\n                \"sha256:119109bb60785fdb3cd0c7fd94967647864a3c3272303dae170fe9977f2616c4\",\n                \"sha256:b0ea1823239790f7fa9fcdfe6023967049205755a906142272eb7dec2ddd513d\",\n                \"sha256:d3862e62bd2287e15cc8d8e6c4be534791515fb9a4a39ebf9554fad27715f59c\",\n                \"sha256:9cc46c0c5c36d38820982fb5b87916d64a73061ddd75b4a10ee6565df12cb70d\",\n                \"sha256:34bacd74da8b3f781b9e6f86a3aea3899f75c21f705ab4b77b11126567006159\",\n                \"sha256:efcce8c7d919cfbaa0e40b53aa6cc25fcd43aaba12091e0fb670b6daf43acc91\",\n                \"sha256:c031c1e5ffdaac083a682495fca3011d75b9d4413600b22eb791e56c978c1640\",\n                \"sha256:5d142881465fbdcb6d54f56144624e4d94067f8f21a723cf3189cb2feec25e98\",\n                \"sha256:4bc7cdc34b58f23708f79a56a120c3b8db8c2a2e8af58c843db76e36f6daf8b6\",\n                \"sha256:3f0aa753b815ed58f116d2d09fe524be28f45b6dae71f4f7b8f1f3f51bf4701d\",\n                \"sha256:0530af3be4604a0f60f6961a3c81527bc865d96c2585b42cd70419870f82d13c\"\n            ]\n        },\n        \"Metadata\": {\n            \"LastTagTime\": \"2026-11-01T14:50:40.868432357Z\"\n        },\n        \"Descriptor\": {\n            \"mediaType\": \"application/vnd.oci.image.index.v1+json\",\n            \"digest\": \"sha256:edf1a849fae2a3856a42870847891edb5c303dddbc12c67d199323d197ccebdb\",\n            \"size\": 856\n        },\n        \"Identity\": {\n            \"Build\": [\n                {\n                    \"Ref\": \"x7u46p8rjc1ra3etwa9i0qx7s\",\n                    \"CreatedAt\": \"2026-11-01T14:50:40.994502424Z\"\n                }\n            ]\n        }\n    }\n]\n",
+      "stderr": "",
+      "elapsedSeconds": 0.09519035299308598
+    },
+    {
+      "label": "candidate image binary identity",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--network=none",
+        "--read-only",
+        "--entrypoint",
+        "sha256sum",
+        "sha256:edf1a849fae2a3856a42870847891edb5c303dddbc12c67d199323d197ccebdb",
+        "/app/build/track-a"
+      ],
+      "startedAt": "2026-11-01T14:50:41.498670+00:00",
+      "exitStatus": 0,
+      "stdout": "691f754f912f08337c48c35fe48206e759621c35add4badceacb5e6877f94c6b  /app/build/track-a\n",
+      "stderr": "",
+      "elapsedSeconds": 0.44621276104589924
+    },
+    {
+      "label": "candidate offline image official full invocation",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--user=65534:65534",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--memory=8g",
+        "--memory-swap=8g",
+        "--pids-limit=512",
+        "--cpuset-cpus=0",
+        "--tmpfs",
+        "/tmp:rw,size=1g,exec",
+        "-e",
+        "TRACK=a",
+        "--mount",
+        "type=bind,source=/tmp/official-a-exp-p_5bvsq2/data,target=/data,readonly",
+        "--mount",
+        "type=bind,source=/tmp/official-a-exp-p_5bvsq2/candidate-offline-full,target=/out",
+        "sha256:edf1a849fae2a3856a42870847891edb5c303dddbc12c67d199323d197ccebdb"
+      ],
+      "startedAt": "2026-11-01T14:50:41.996609+00:00",
+      "exitStatus": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsedSeconds": 1.9646112089976668
+    }
+  ],
+  "sourceSha256": "176e94ac440d0fa7c512ccb7221d0b0fe4d90550a6fd080d4be5f95e69b809cf",
+  "testSha256": "3f3d2655bffbe97dc37a070f19647724e0b22c6d7aba03de547775b841a25883",
+  "checkerSha256": "c0876950a1ddb3e4629afecc63c275f25bb3e39dcdcf4117ae6673a6060bf71a",
+  "contextManifest": [
+    {
+      "path": ".dockerignore",
+      "bytes": 37,
+      "sha256": "e4fdb61df432ee1d1f134a2a5dd8aaab82b40614f3d5577f01990f46eab2477b"
+    },
+    {
+      "path": ".speed-demon.toml",
+      "bytes": 117,
+      "sha256": "b9eb863d1bc38a067fe18e052661923324ac0c5c17b9c5eb264a284251527d4c"
+    },
+    {
+      "path": "Dockerfile",
+      "bytes": 231,
+      "sha256": "bcbbd20f960230c2721171d4f2d12dd84d7fea652edf341fe96a8ce9acaaecd4"
+    },
+    {
+      "path": "PERF.md",
+      "bytes": 282,
+      "sha256": "9ee38e2938945d1f4ee25d8bdf1b76dfb3bd9cd672f1b544a4e523dc7239dd89"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1606,
+      "sha256": "1b7f271896a74ae713e7e44760f0925e66d3f503b37c324267eb8a936ccf67d3"
+    },
+    {
+      "path": "build.sh",
+      "bytes": 147,
+      "sha256": "807197c06bf5a5ae70f8a038f7ccdb09423cc6066d47129c61be4bd3c0540702"
+    },
+    {
+      "path": "src/main.cpp",
+      "bytes": 19156,
+      "sha256": "176e94ac440d0fa7c512ccb7221d0b0fe4d90550a6fd080d4be5f95e69b809cf"
+    }
+  ],
+  "suites": {
+    "optimized": {
+      "checks": 138,
+      "referenceComparisons": 59,
+      "skips": 0,
+      "binarySha256": "691f754f912f08337c48c35fe48206e759621c35add4badceacb5e6877f94c6b",
+      "resultSha256": "d37756d814485cede192543eaf7777a62adbd07cc8221b727a5754871d2dc814"
+    },
+    "sanitizer": {
+      "checks": 138,
+      "referenceComparisons": 59,
+      "skips": 0,
+      "binarySha256": "00a56cff390848121823e64f177958aaeb69434a2110d06e1201cc02ea7113c7",
+      "resultSha256": "d37756d814485cede192543eaf7777a62adbd07cc8221b727a5754871d2dc814"
+    }
+  },
+  "imageId": "sha256:edf1a849fae2a3856a42870847891edb5c303dddbc12c67d199323d197ccebdb",
+  "buildSeconds": 47.847261896007694,
+  "imageBytes": 552659633,
+  "fullOutputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3",
+  "finishedAt": "2026-11-01T14:50:44.168117+00:00"
+}

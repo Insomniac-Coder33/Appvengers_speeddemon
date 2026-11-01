@@ -1,0 +1,87 @@
+{
+  "createdAt": "2026-11-01T14:57:28.507252+00:00",
+  "sourceSha256": "176e94ac440d0fa7c512ccb7221d0b0fe4d90550a6fd080d4be5f95e69b809cf",
+  "binarySha256": "691f754f912f08337c48c35fe48206e759621c35add4badceacb5e6877f94c6b",
+  "sanitizerBinarySha256": "00a56cff390848121823e64f177958aaeb69434a2110d06e1201cc02ea7113c7",
+  "testedContextManifest": [
+    {
+      "path": ".dockerignore",
+      "bytes": 37,
+      "sha256": "e4fdb61df432ee1d1f134a2a5dd8aaab82b40614f3d5577f01990f46eab2477b"
+    },
+    {
+      "path": ".speed-demon.toml",
+      "bytes": 117,
+      "sha256": "b9eb863d1bc38a067fe18e052661923324ac0c5c17b9c5eb264a284251527d4c"
+    },
+    {
+      "path": "Dockerfile",
+      "bytes": 231,
+      "sha256": "bcbbd20f960230c2721171d4f2d12dd84d7fea652edf341fe96a8ce9acaaecd4"
+    },
+    {
+      "path": "PERF.md",
+      "bytes": 282,
+      "sha256": "9ee38e2938945d1f4ee25d8bdf1b76dfb3bd9cd672f1b544a4e523dc7239dd89"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1606,
+      "sha256": "1b7f271896a74ae713e7e44760f0925e66d3f503b37c324267eb8a936ccf67d3"
+    },
+    {
+      "path": "build.sh",
+      "bytes": 147,
+      "sha256": "807197c06bf5a5ae70f8a038f7ccdb09423cc6066d47129c61be4bd3c0540702"
+    },
+    {
+      "path": "src/main.cpp",
+      "bytes": 19156,
+      "sha256": "176e94ac440d0fa7c512ccb7221d0b0fe4d90550a6fd080d4be5f95e69b809cf"
+    }
+  ],
+  "finalDocumentationContextManifest": [
+    {
+      "path": ".dockerignore",
+      "bytes": 37,
+      "sha256": "e4fdb61df432ee1d1f134a2a5dd8aaab82b40614f3d5577f01990f46eab2477b"
+    },
+    {
+      "path": ".speed-demon.toml",
+      "bytes": 117,
+      "sha256": "b9eb863d1bc38a067fe18e052661923324ac0c5c17b9c5eb264a284251527d4c"
+    },
+    {
+      "path": "Dockerfile",
+      "bytes": 231,
+      "sha256": "bcbbd20f960230c2721171d4f2d12dd84d7fea652edf341fe96a8ce9acaaecd4"
+    },
+    {
+      "path": "PERF.md",
+      "bytes": 2529,
+      "sha256": "96a25a30090db0c3db9e50d0674e2489eb38464a71f52bf3ea2f94b4aa05ed6a"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1606,
+      "sha256": "1b7f271896a74ae713e7e44760f0925e66d3f503b37c324267eb8a936ccf67d3"
+    },
+    {
+      "path": "build.sh",
+      "bytes": 147,
+      "sha256": "807197c06bf5a5ae70f8a038f7ccdb09423cc6066d47129c61be4bd3c0540702"
+    },
+    {
+      "path": "src/main.cpp",
+      "bytes": 19156,
+      "sha256": "176e94ac440d0fa7c512ccb7221d0b0fe4d90550a6fd080d4be5f95e69b809cf"
+    }
+  ],
+  "documentationOnlyAfterVerification": [
+    "PERF.md"
+  ],
+  "testSha256": "3f3d2655bffbe97dc37a070f19647724e0b22c6d7aba03de547775b841a25883",
+  "verificationSha256": "0c5ccc02ce8792a83c11b6aa6432ef2a72141e98e243eda8b9eb0d864d82de4a",
+  "pairResultsSha256": "5f3d513097b0651196c68e9ca270e3f82969ead5f725bee00feb1eb4628c8ca0",
+  "memoryResultsSha256": "3c94f3f0f18f271605358937ca786547104e5fb2f78140572cb4230f0d54dbee"
+}

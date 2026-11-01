@@ -1,0 +1,111 @@
+{
+  "createdAt": "2026-11-01T14:57:28.507252+00:00",
+  "candidateCount": 1,
+  "pairCount": 6,
+  "geometricMeanPairedSpeedRatio": 1.577961256786812,
+  "medianPairedSpeedRatio": 1.5824423354793535,
+  "pairedWallReductionGeometricPercent": 36.627087914928225,
+  "speedRatioMinMax": [
+    1.441474848463128,
+    1.6964096997523763
+  ],
+  "smallSamplePairedBootstrap95PercentInterval": [
+    1.501142723680445,
+    1.653058260499655
+  ],
+  "metrics": {
+    "baseline": {
+      "medianWallSeconds": 1.8652070054999998,
+      "meanWallSeconds": 1.851777429,
+      "wallSpreadPercent": 9.924325957074045,
+      "minWallSeconds": 1.754806401,
+      "maxWallSeconds": 1.939915624,
+      "medianUserSeconds": 1.8612695000000001,
+      "medianSystemSeconds": 0.09553400000000001,
+      "medianRssKiB": 32678.0,
+      "cpuTimeExceedsWallRuns": 6
+    },
+    "candidate": {
+      "medianWallSeconds": 1.1552131069999998,
+      "meanWallSeconds": 1.1767276641666666,
+      "wallSpreadPercent": 23.70811950976246,
+      "minWallSeconds": 1.065253854,
+      "maxWallSeconds": 1.339133158,
+      "medianUserSeconds": 1.118093,
+      "medianSystemSeconds": 0.1018255,
+      "medianRssKiB": 32616.0,
+      "cpuTimeExceedsWallRuns": 6
+    }
+  },
+  "source": {
+    "baseline": {
+      "bytes": 20341,
+      "physicalLines": 520,
+      "unformattedNonblankNoncommentLineProxy": 483,
+      "sha256": "e46b40c01364d334716341f713dbb5e035ce7b043ed1d42f7c849eccd026a62d"
+    },
+    "candidate": {
+      "bytes": 19156,
+      "physicalLines": 465,
+      "unformattedNonblankNoncommentLineProxy": 430,
+      "sha256": "176e94ac440d0fa7c512ccb7221d0b0fe4d90550a6fd080d4be5f95e69b809cf"
+    }
+  },
+  "sourceByteGrowthPercent": -5.8256722874981515,
+  "memory": {
+    "baseline": {
+      "revision": "baseline",
+      "process": {
+        "wallSeconds": 2.565537886,
+        "userSeconds": 2.60086,
+        "systemSeconds": 0.10607,
+        "maxRssKiB": 32648,
+        "minorFaults": 8023,
+        "majorFaults": 0,
+        "voluntarySwitches": 1,
+        "involuntarySwitches": 1011,
+        "exitCode": 0,
+        "signal": 0
+      },
+      "cgroupMemoryPeakBytes": 41594880,
+      "cgroupMemoryStat": "anon 225280\nfile 10207232\nkernel 1032192\nkernel_stack 32768\npagetables 73728\nsec_pagetables 0\npercpu 5208\nsock 0\nvmalloc 12288\nshmem 0\nfile_mapped 45056\nfile_dirty 10129408\nfile_writeback 0\nswapcached 0\nanon_thp 0\nfile_thp 0\nshmem_thp 0\ninactive_anon 204800\nactive_anon 8192\ninactive_file 10166272\nactive_file 40960\nunevictable 0\nslab_reclaimable 404856\nslab_unreclaimable 214232\nslab 619088\nworkingset_refault_anon 0\nworkingset_refault_file 0\nworkingset_activate_anon 0\nworkingset_activate_file 0\nworkingset_restore_anon 0\nworkingset_restore_file 0\nworkingset_nodereclaim 0\npgscan 0\npgsteal 0\npgscan_kswapd 0\npgscan_direct 0\npgscan_khugepaged 0\npgsteal_kswapd 0\npgsteal_direct 0\npgsteal_khugepaged 0\npgfault 9582\npgmajfault 1\npgrefill 0\npgactivate 1\npgdeactivate 0\npglazyfree 0\npglazyfreed 0\nthp_fault_alloc 0\nthp_collapse_alloc 0\n",
+      "cgroupMemoryEvents": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+      "outputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3"
+    },
+    "candidate": {
+      "revision": "candidate",
+      "process": {
+        "wallSeconds": 1.095746034,
+        "userSeconds": 1.009828,
+        "systemSeconds": 0.152747,
+        "maxRssKiB": 32576,
+        "minorFaults": 8025,
+        "majorFaults": 0,
+        "voluntarySwitches": 1,
+        "involuntarySwitches": 96,
+        "exitCode": 0,
+        "signal": 0
+      },
+      "cgroupMemoryPeakBytes": 41996288,
+      "cgroupMemoryStat": "anon 221184\nfile 10125312\nkernel 1015808\nkernel_stack 32768\npagetables 69632\nsec_pagetables 0\npercpu 5208\nsock 0\nvmalloc 12288\nshmem 0\nfile_mapped 0\nfile_dirty 10125312\nfile_writeback 0\nswapcached 0\nanon_thp 0\nfile_thp 0\nshmem_thp 0\ninactive_anon 200704\nactive_anon 8192\ninactive_file 10121216\nactive_file 4096\nunevictable 0\nslab_reclaimable 396008\nslab_unreclaimable 214232\nslab 610240\nworkingset_refault_anon 0\nworkingset_refault_file 0\nworkingset_activate_anon 0\nworkingset_activate_file 0\nworkingset_restore_anon 0\nworkingset_restore_file 0\nworkingset_nodereclaim 0\npgscan 0\npgsteal 0\npgscan_kswapd 0\npgscan_direct 0\npgscan_khugepaged 0\npgsteal_kswapd 0\npgsteal_direct 0\npgsteal_khugepaged 0\npgfault 9578\npgmajfault 0\npgrefill 0\npgactivate 0\npgdeactivate 0\npglazyfree 0\npglazyfreed 0\nthp_fault_alloc 0\nthp_collapse_alloc 0\n",
+      "cgroupMemoryEvents": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+      "outputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3"
+    }
+  },
+  "sourceAccounting": "Official clang-format+scc tools image absent; no unformatted count is presented as official S. Exact code bytes and physical lines are reported; K assumes unchanged S and D, then tests sensitivity. No source-shrink credit used.",
+  "K": {
+    "formulaSource": "https://github.com/hackathon-raptors/speed-demon-2026/blob/ad1f06063a76bf94066f169e133ec0c2e1485b65/harness/scoring.py",
+    "referenceSourceLines": 56,
+    "dependencyWeightBoth": 1,
+    "sameSourceSameMemoryMultiplier": 1.2561692787147805,
+    "rssProxySameSourceUncappedMemoryMultiplier": 1.2566464883282447,
+    "sourceGrowth20PercentSameMemoryMultiplier": 1.2222807754392877,
+    "sourceGrowth50PercentSameMemoryMultiplier": 1.1820462759826804,
+    "memoryCap": 50,
+    "sourceCap": 1,
+    "absoluteK": null,
+    "whyNoAbsoluteK": "No current official baseline board result, canonical S or exact local-equivalent reference T/M; CPU and memory metrics differ from scoring box."
+  },
+  "decision": "Recommend the verified line-span candidate for the next authorized board comparison; preserve scalar baseline as default until actual board gates and source accounting. No submission/worktree files changed.",
+  "noiseConclusion": "All six adjacent pairs favor candidate in both orders; minimum paired wall reduction exceeds largest observed individual workload spread. No second batch or A/A campaign needed to establish this local difference. Generalization to board/holdout is unproved."
+}

@@ -1,0 +1,235 @@
+{
+  "startedAt": "2026-11-01T14:45:36.485994+00:00",
+  "mode": "candidate-build",
+  "completed": true,
+  "commands": [
+    {
+      "label": "compile candidate",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--tmpfs",
+        "/tmp:rw,size=1g,exec",
+        "--mount",
+        "type=bind,source=/tmp/official-a-exp-p_5bvsq2/candidate,target=/source,readonly",
+        "--mount",
+        "type=bind,source=/tmp/official-a-exp-p_5bvsq2,target=/work",
+        "--workdir",
+        "/source",
+        "--entrypoint",
+        "g++",
+        "gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce",
+        "-std=c++20",
+        "-O2",
+        "-DNDEBUG",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "src/main.cpp",
+        "-o",
+        "/work/bin/candidate"
+      ],
+      "startedAt": "2026-11-01T14:45:37.508208+00:00",
+      "exitStatus": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsedSeconds": 4.25420937204035
+    },
+    {
+      "label": "compile candidate-san",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--tmpfs",
+        "/tmp:rw,size=1g,exec",
+        "--mount",
+        "type=bind,source=/tmp/official-a-exp-p_5bvsq2/candidate,target=/source,readonly",
+        "--mount",
+        "type=bind,source=/tmp/official-a-exp-p_5bvsq2,target=/work",
+        "--workdir",
+        "/source",
+        "--entrypoint",
+        "g++",
+        "gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce",
+        "-std=c++20",
+        "-O1",
+        "-g",
+        "-fno-omit-frame-pointer",
+        "-fsanitize=address,undefined",
+        "-fno-sanitize-recover=all",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "src/main.cpp",
+        "-o",
+        "/work/bin/candidate-san"
+      ],
+      "startedAt": "2026-11-01T14:45:41.998256+00:00",
+      "exitStatus": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsedSeconds": 11.55528814200079
+    },
+    {
+      "label": "start candidate-full",
+      "command": [
+        "docker",
+        "run",
+        "-d",
+        "--name",
+        "oa-candidate-full-p_5bvsq2",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--user=65534:65534",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--memory=8g",
+        "--memory-swap=8g",
+        "--pids-limit=512",
+        "--cpuset-cpus=0",
+        "--tmpfs",
+        "/tmp:rw,size=1g,exec",
+        "-e",
+        "TRACK=a",
+        "--mount",
+        "type=bind,source=/tmp/official-a-exp-p_5bvsq2,target=/work",
+        "--mount",
+        "type=bind,source=/tmp/official-a-exp-p_5bvsq2/data,target=/data,readonly",
+        "--entrypoint",
+        "/bin/sh",
+        "gcc:15@sha256:eb5e64286ad47187b32bda75c6b6916166ecb41da56559b8b09e0001748d2cce",
+        "-c",
+        "exec sleep infinity"
+      ],
+      "startedAt": "2026-11-01T14:45:53.644726+00:00",
+      "exitStatus": 0,
+      "stdout": "65b4a9d406121ffac38e863b3746a36152be17668255c8b635f9a53282342572\n",
+      "stderr": "",
+      "elapsedSeconds": 1.87960451800609
+    },
+    {
+      "label": "complete program candidate-full-check",
+      "command": [
+        "docker",
+        "exec",
+        "oa-candidate-full-p_5bvsq2",
+        "/work/bin/timer",
+        "/work/bin/candidate",
+        "--data",
+        "/data",
+        "--out",
+        "/work/outputs/candidate-full-check"
+      ],
+      "startedAt": "2026-11-01T14:45:55.537949+00:00",
+      "exitStatus": 0,
+      "stdout": "{\"wallSeconds\":1.603429677,\"userSeconds\":1.340174000,\"systemSeconds\":0.366378000,\"maxRssKiB\":32640,\"minorFaults\":8027,\"majorFaults\":0,\"voluntarySwitches\":1,\"involuntarySwitches\":129,\"exitCode\":0,\"signal\":0}\n",
+      "stderr": "",
+      "elapsedSeconds": 1.9437159349909052
+    },
+    {
+      "label": "remove owned experiment container",
+      "command": [
+        "docker",
+        "rm",
+        "-f",
+        "oa-candidate-full-p_5bvsq2"
+      ],
+      "startedAt": "2026-11-01T14:45:57.569496+00:00",
+      "exitStatus": 0,
+      "stdout": "oa-candidate-full-p_5bvsq2\n",
+      "stderr": "",
+      "elapsedSeconds": 1.3277271119877696
+    }
+  ],
+  "policySha256": "167a73c7733d1bb95ec17793cb439b1c0449c7f2c6c88376352c9f751d855363",
+  "driverSha256": "cb7a4aaee11b5ca63ef11a179a3eb3319333d3055adf1d90ce2f93f79536f05f",
+  "stage": "/tmp/official-a-exp-p_5bvsq2",
+  "sourceSha256": "176e94ac440d0fa7c512ccb7221d0b0fe4d90550a6fd080d4be5f95e69b809cf",
+  "binarySha256": "691f754f912f08337c48c35fe48206e759621c35add4badceacb5e6877f94c6b",
+  "contextManifest": [
+    {
+      "path": ".dockerignore",
+      "bytes": 37,
+      "sha256": "e4fdb61df432ee1d1f134a2a5dd8aaab82b40614f3d5577f01990f46eab2477b"
+    },
+    {
+      "path": ".speed-demon.toml",
+      "bytes": 117,
+      "sha256": "b9eb863d1bc38a067fe18e052661923324ac0c5c17b9c5eb264a284251527d4c"
+    },
+    {
+      "path": "Dockerfile",
+      "bytes": 231,
+      "sha256": "bcbbd20f960230c2721171d4f2d12dd84d7fea652edf341fe96a8ce9acaaecd4"
+    },
+    {
+      "path": "PERF.md",
+      "bytes": 282,
+      "sha256": "9ee38e2938945d1f4ee25d8bdf1b76dfb3bd9cd672f1b544a4e523dc7239dd89"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7203,
+      "sha256": "4e5513e820c56b4242bf57e74d6f1f9328a5546460e6f5fd9cafd4d54f732c74"
+    },
+    {
+      "path": "build.sh",
+      "bytes": 147,
+      "sha256": "807197c06bf5a5ae70f8a038f7ccdb09423cc6066d47129c61be4bd3c0540702"
+    },
+    {
+      "path": "src/main.cpp",
+      "bytes": 19156,
+      "sha256": "176e94ac440d0fa7c512ccb7221d0b0fe4d90550a6fd080d4be5f95e69b809cf"
+    }
+  ],
+  "sanitizerBinarySha256": "00a56cff390848121823e64f177958aaeb69434a2110d06e1201cc02ea7113c7",
+  "sanitizerFlags": [
+    "-std=c++20",
+    "-O1",
+    "-g",
+    "-fno-omit-frame-pointer",
+    "-fsanitize=address,undefined",
+    "-fno-sanitize-recover=all",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic"
+  ],
+  "fullCheck": {
+    "wallSeconds": 1.603429677,
+    "userSeconds": 1.340174,
+    "systemSeconds": 0.366378,
+    "maxRssKiB": 32640,
+    "minorFaults": 8027,
+    "majorFaults": 0,
+    "voluntarySwitches": 1,
+    "involuntarySwitches": 129,
+    "exitCode": 0,
+    "signal": 0,
+    "revision": "candidate",
+    "label": "candidate-full-check",
+    "telemetryBefore": {
+      "/proc/loadavg": "2.55 2.29 2.13 2/499 8294\n",
+      "/proc/pressure/cpu": "some avg10=0.00 avg60=0.04 avg300=0.01 total=168193278\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+      "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+      "/proc/pressure/io": "some avg10=14.68 avg60=3.41 avg300=1.07 total=1842265636\nfull avg10=14.61 avg60=3.38 avg300=1.06 total=1818198948\n"
+    },
+    "telemetryAfter": {
+      "/proc/loadavg": "2.55 2.29 2.13 2/499 8304\n",
+      "/proc/pressure/cpu": "some avg10=0.54 avg60=0.13 avg300=0.03 total=168221524\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+      "/proc/pressure/memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+      "/proc/pressure/io": "some avg10=13.29 avg60=3.53 avg300=1.11 total=1842266094\nfull avg10=13.23 avg60=3.50 avg300=1.10 total=1818199395\n"
+    },
+    "outputSha256": "495ca09682b9673ef836a506496177680bb4a3af54255174befddb1f83481cd3"
+  },
+  "finishedAt": "2026-11-01T14:45:57.539908+00:00"
+}

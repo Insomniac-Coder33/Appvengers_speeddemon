@@ -1,4 +1,23 @@
-# Track A official integration plan
+# Track A project plan
+
+## Active status - 1 November 2026
+
+See [the competitive plan](docs/TRACK_A_COMPETITIVE_PLAN_2026-11-01.md) for the
+current backlog, optimization hypotheses and next bounded implementation task.
+
+- Team **Appvengers** and **MIT** licensing are confirmed; the reviewed submission
+  package contains 14 files, including the actual starter checker and attribution.
+- The Board app is installed. The public feed snapshot at 2026-11-01T14:31:27Z
+  confirms Track A registration but reports **no speed-demon branch yet**; no
+  Appvengers run or performance result is present in that snapshot.
+- The local `speed-demon` worktree is prepared at `.tools/speed-demon-worktree/`,
+  based on existing commit d5a770e. Its changes remain unstaged and uncommitted;
+  push authorization is pending. Main and previous Git history are preserved.
+- Official-format correctness integration is complete. Proposed performance
+  experiments have not been implemented by this planning review.
+- The older metadata/license/repository and app-registration TODOs in the record
+  below describe the integration milestone's earlier state; use this status for
+  current delivery readiness. Earlier results and provenance remain historical.
 
 ## Current result — 31 October 2026
 
