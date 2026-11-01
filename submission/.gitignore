@@ -1,0 +1,10 @@
+.out/
+data/
+track-a/build/
+__pycache__/
+*.py[cod]
+*.o
+*.obj
+*.exe
+.DS_Store
+Thumbs.db
